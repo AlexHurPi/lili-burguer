@@ -1,0 +1,227 @@
+{
+  "header": {
+    "title": "Your company name",
+    "subtitle": "Your slogan",
+    "image": "./images/products/logocafe.png"
+  },
+  "footer": {
+    "infofooter": [
+      {
+        "empresa": "Your company name.",
+        "slogan": "Your slogan.",
+        "razonsocial": "Legal name: Your company name S.A.S.",
+        "nit": "NIT: 123456789-0",
+        "dondeestamos": "Where are we?",
+        "ubicacion": "City, Department, Country.",
+        "direccion": "Address: Fake Street 123, City, Country.",
+        "correo": "user@company.com",
+        "telefono": "Phone: +57 123 456 7890",
+        "redessociales": "Follow us on our social media:",
+        "facebook": "Facebook link",
+        "twitter": "Twitter link",
+        "instagram": "Instagram link",
+        "final": "© 2026 COMPANY S.A.S. All rights reserved."
+      }
+    ]
+  },
+  "cards": {
+    "title1": "Coffee & hot drinks",
+    "image1": "./images/products/Cafe_y_bebidas.png",
+    "card1": [
+      {
+        "title": "Americano",
+        "product1": "",
+        "product2": "",
+        "price": "5.000"
+      },
+      {
+        "title": "Cappuccino",
+        "product1": "",
+        "product2": "",
+        "price": "7.000"
+      },
+      {
+        "title": "Mocha coffee",
+        "ingredient1": "Coffee with chocolate notes",
+        "price": "8.500"
+      },
+      {
+        "title": "Angel's kiss latte",
+        "ingredient1": "Espresso with whiskey cream and milk",
+        "price": "10.000"
+      },
+      {
+        "title": "Irish coffee",
+        "ingredient1": "Whiskey, chantilly cream and espresso",
+        "price": "10.000"
+      },
+      {
+        "title": "Infusion",
+        "product1": "Ginger: with tree tomato, orange and stevia leaves.",
+        "product2": "Red fruits: blackberry, strawberry, hibiscus flower, blueberries and stevia leaves.",
+        "price": "8.500"
+      }
+    ],
+    "title2": "Cold drinks",
+    "image2": "./images/products/Bebidas_frias.png",
+    "card2": [
+      {
+        "title": "Iced latte",
+        "ingredient1": "Espresso shot, ice and milk",
+        "price": "10.000"
+      },
+      {
+        "title": "Affogato",
+        "ingredient1": "Perfect combination between creamy ice cream and espresso",
+        "price": "12.000"
+      },
+      {
+        "title": "Orange Coffee",
+        "ingredient1": "Orange juice, more ice and espresso shot",
+        "price": "10.000"
+      },
+      {
+        "title": "Coffee lemonade",
+        "product1": "Double espresso with ice and lemon",
+        "product2": "You can also order it with tequila liqueur",
+        "price": "18.000"
+      },
+      {
+        "title": "Matcha tea",
+        "ingredient1": "With coconut milk",
+        "price": "10.000"
+      },
+      {
+        "title": "Flavored sodas",
+        "ingredient1": "Passion fruit, lychee, watermelon, strawberry",
+        "price": "18.000"
+      },
+      {
+        "title": "Cold Milo",
+        "price": "9.000"
+      },
+      {
+        "title": "What if you let me?",
+        "ingredient1": "Espresso, lemon and rum",
+        "price": "16.000"
+      }
+    ],
+    "title3": "Afternoon snack",
+    "image3": "./images/products/Tardeo1.png",
+    "card3": [
+      {
+        "title": "House bites",
+        "ingredient1": "3 Crispy and tasty empanadas",
+        "ingredient2": "2 Delicious aborrajados",
+        "ingredient3": "1 Crispy marranita",
+        "ingredient4": "1 Fresh and tasty yuca cake",
+        "price": "18.000"
+      }
+    ],
+    "title4": "",
+    "image4": "./images/products/Tardeo2.png",
+    "card4": [
+      {
+        "title": "Waffle bread",
+        "ingredient1": "4 Units, with cheese and arequipe",
+        "price": "15.000"
+      }
+    ],
+    "title5": "",
+    "image5": "./images/products/Tardeo3.png",
+    "card5": [
+      {
+        "title": "Migao",
+        "ingredient1": "1 Pandewaffle, 1 Buñuelo, 1 Toast, 2 Cheese sticks, Ducales, Saltín, Cheese and Chocolate.",
+        "price": "16.000"
+      }
+    ],
+    "title6": "Desserts and cakes",
+    "image6": "./images/products/Torta1.png",
+    "card6": [
+      {
+        "title": "Chocolate cake",
+        "ingredient1": "Sweetened with stevia without bitterness, covered with chocolate cream and 70% chocolate chips.",
+        "price": "13.000"
+      },
+      {
+        "title": "German cake",
+        "ingredient1": "Vanilla cake, filled with greek yogurt and arequipe, covered with greek yogurt cream and almonds.",
+        "price": "13.000"
+      },
+      {
+        "title": "Carrot cake",
+        "ingredient1": "Artisanal with nuts, low in sugar.",
+        "price": "13.000"
+      }
+    ],
+    "title7": "Desserts and cakes",
+    "image7": "./images/products/Torta2.png",
+    "card7": [
+      {
+        "title": "Red fruits cheesecake",
+        "ingredient1": "Traditional cheesecake with red fruits: blackberry, strawberries and agraz.",
+        "price": "15.000"
+      },
+      {
+        "title": "Alfajores",
+        "ingredient1": "Filled with arequipe, sugar-free and sweetened with stevia without bitterness.",
+        "price": "7.000"
+      }
+    ],
+    "title8": "",
+    "image8": "./images/products/Torta3.png",
+    "card8": [
+      {
+        "title": "Filled cookies",
+        "ingredient1": "Sugar-free sweetened with stevia without bitterness. Ask about our flavors.",
+        "price": "7.000"
+      },
+      {
+        "title": "Almond croissant",
+        "price": "11.500"
+      },
+      {
+        "title": "Cinnamon rolls",
+        "price": "7.000"
+      },
+      {
+        "title": "Brownies",
+        "price": "7.000"
+      },
+      {
+        "title": "Ask about our weekly dessert",
+        "price": "13.000"
+      }
+    ],
+    "title9": "Hamburger",
+    "image9": "./images/products/Hamburguesa.png",
+    "card9": [
+      {
+        "title": "Homemade",
+        "ingredient1": "Delicious and artisanal, 130 g of beef Fresh brioche bread, melted cheddar cheese, fresh tomato and lettuce, crispy bacon, honey for a sweet touch, Crispy yuca croquettes, House sauce for a unique flavor. *Available from 4:00 p.m.",
+        "price": "25.000"
+      }
+    ],
+    "title10": "Cocktails & Wines",
+    "image10": "./images/products/Cocteles1.png",
+    "card10": [
+      {
+        "title": "Martina's heart cocktail",
+        "ingredient1": "Artisanal cocktail. Available flavors:",
+        "ingredient2": "passion fruit, lulo and watermelon.",
+        "price": "13.000"
+      }
+    ],
+    "title11": "",
+    "image11": "./images/products/Cocteles2.png",
+    "card11": [
+      {
+        "title": "Glass of artisanal wine",
+        "ingredient1": "Martina's heart.",
+        "ingredient2": "Ask about available options.",
+        "price": "10.000"
+      }
+    ]
+  }
+}

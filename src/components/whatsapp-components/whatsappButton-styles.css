@@ -1,0 +1,26 @@
+.whatsapp-container {   
+    position: fixed;
+    bottom: 210px;
+    right: calc(50vw - 360px);
+    z-index: 1000;    
+}
+.whatsapp-container h3 {
+    color: var(--vivid);
+    font-size: 14px;
+    margin: 0px;
+}
+.whatsapp-container button {
+    margin: 0;
+    background-color: transparent;
+    border: none;    
+    width: 70px;
+    height: 70px;     
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+@media (max-width: 600px) {
+    .whatsapp-container {
+        bottom: 120px;        
+        right: 0px;
+    }    
+}

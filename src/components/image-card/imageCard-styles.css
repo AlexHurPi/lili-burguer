@@ -1,0 +1,97 @@
+
+    .imageCard-mainContainer{
+       display: flex;
+       flex-direction: column; 
+       justify-content: center;
+       align-items: center;
+       width: 100%;
+       max-width: 600px;
+    }
+    .seccion{                     
+        display: flex;  
+        justify-content: center;  
+        align-items: center;            
+        background: var(--background-dark);            
+        width: 95%; 
+        height: 2.5em; 
+        margin-top: 1em; 
+        border-radius: 0.5em; 
+        box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, .5);              
+    }  
+    .tarjeta{
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.5em;
+        border: 2px solid darkgray;
+        overflow: hidden; 
+        box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, .5);  
+        width: 88%;  
+        margin-top: 1em;                  
+    }    
+    .tarjeta:hover{
+        box-shadow: 6px 5px 5px 5px rgba(0, 0, 0, .5); 
+        border-color: red;
+    }
+    .contImagenProducto{
+        display: flex;                   
+        padding: 0.5em;
+        background: var(--background-light);            
+        height: 15em;  
+                                         
+    }
+    .contImagenProducto img{              
+        height: 100%;/* Ocupa el 60% de la altura de la celda */
+        margin: auto; /* Centra la imagen vertical y horizontalmente */
+        object-fit: cover; /* Ajusta la imagen para cubrir la celda */ 
+         border-radius: 10%;    
+    }        
+    .contSubtitulos { 
+        background: var(--background-dark);            
+        padding: 0.5em 0.5em;            
+        text-align: left;                    
+        max-width: 100%; /* Establece el ancho máximo del contenedor */
+        text-overflow: ellipsis; /* Agrega puntos suspensivos (...) al texto desbordado */            
+    
+    }       
+     .productoPrecio{
+        display: flex;
+        justify-content: space-between;                       
+    }
+    .seccion h3{
+        font-family: var(--font-bold);
+        font-size: var(--text-lg);
+        color: var(--title); 
+    }
+    .contSubtitulos h4{   
+        font-family: var(--font-base);        
+        font-size: var(--text-base); 
+        color: var(--vivid1);   
+        line-height: 1.2;            
+    }        
+    .contSubtitulos p{
+        font-family: var(--font-base);
+        margin-left: 0.5em;           
+        font-size: var(--text-xs); 
+        color: var(--text);   
+        line-height: 1;
+        margin-bottom: 0.3rem; /*Espacio mínimo abajo*/              
+    }
+    .contSubtitulos li{
+        font-family: var(--font-base);
+        font-size: var(--text-xs); 
+        color: var(--text);   
+        line-height: 1;
+        margin-bottom: 0.3rem; /*Espacio mínimo abajo*/  
+        position: relative;
+        padding-left: 1rem;                      
+    }
+    .contSubtitulos ul ::before{
+        content: ""; /* Contenido del círculo*/
+        position: absolute;
+        left: 0;
+        top: .55em;
+        width: .38rem;
+        height: .38rem;
+        border-radius: 50%;
+        background: var(--vivid);                     
+    }

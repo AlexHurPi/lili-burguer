@@ -1,0 +1,31 @@
+ .social-icons{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  .social-icons a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    color:var(--title);
+    text-decoration:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+
+  .social-icons a:hover{
+    opacity:.75;
+    transform:translateY(-2px);
+  }
+
+  .social-icons svg{
+    display:block;
+    width:24px;
+    height:24px;
+    fill:currentColor;
+    flex:none;
+  }

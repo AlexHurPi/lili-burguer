@@ -1,0 +1,200 @@
+{
+  "header": {
+    "title": "Lili Burguers",
+    "subtitle": "TU ANTOJO, AL INSTANTE",
+    "image": "./images/Encabezado.webp"
+  },
+  "footer": {
+    "infofooter": [
+      {
+          "empresa": "Lili Burguers",
+          "slogan": "Tu antojo, al instante",
+          "razonsocial": "",
+          "nit": "",
+          "dondeestamos": "¿Dónde estamos?",
+          "ubicacion": "Somos una tienda virtual ubicada en el norte de Cali - Valle del cauca.",
+          "direccion": "",
+          "correo": "",
+          "telefono": "Teléfono: +57 3236018171 ",
+          "redessociales": "Síguenos en nuestras redes sociales:",
+          "facebook": "https://www.facebook.com/",
+          "twitter": "enlace a Twitter",
+          "instagram": "https://www.instagram.com/",
+          "youtube": "",
+          "tiktok": "",
+          "final": "Lili Burguers."
+      }
+  ]
+  },
+  "cards": {
+    "title1": "Hamburguesas",
+    "image1": "./images/products/Hamburguesa.webp",
+    "card1": [
+      {
+        "title": "Clasica",
+        "ingredient1": "Pan, carne angus.",
+        "product1": "",
+        "product2": "",
+        "price": "15.000"
+      },
+      {
+        "title": "Economica (mas pequeña)",
+        "ingredient1": "Pan, carne angu.s",
+        "product1": "",
+        "product2": "",
+        "price": "10.000"
+      }  
+    ],
+    
+    "title2": "Perro caliente",
+    "image2": "./images/products/Perro Lili.webp",
+    "card2": [
+      {
+        "title": "Clasico",
+        "ingredient1": "Pan, salchicha, cebolla y queso.",        
+        "price": "13.000"
+      },
+      {
+        "title": "Economico (mas pequeño)",
+        "ingredient1": "Pan, salchicha, cebolla y queso.",
+        "price": "8.000"
+      }      
+    ],
+    "title3": "Sndwiches",
+    "image3": "./images/products/Sandwich.webp",
+    "card3": [
+      {
+        "title": "Clasico",
+        "product1": "Grande",
+        "product2": "Mediano",
+        "product3": "Pequeño",
+        "price": "20.000 - 15.000 - 10.000"        
+      }     
+    ],
+    "title4": "Salchipapas",
+    "image4": "./images/products/Salchipapa2.webp",
+    "card4": [
+      {
+        "title": "Grande",
+        "ingredient1": "Papa frita, salchicha, cebolla y queso.",           
+        "price": "15.000"
+      },    
+      {
+        "title": "Economica (mas pequeña)",
+        "ingredient1": "Papa frita, salchicha, cebolla y queso.",           
+        "price": "10.000"
+      }      
+    ],
+    "title5": "Canastas de platano",
+    "image5": "./images/products/Canastas de platano.webp",
+    "card5": [
+      {
+        "title": "Clasicas",
+        "ingredient1": "2 Canastas de platano con carne desmechada y guacamole.",           
+        "price": "16.000"
+      }     
+    ],
+    "title6": "Empanadas",
+    "image6": "./images/products/Empanadas2.webp",
+    "card6": [
+      {
+        "title": "De carne",
+        "ingredient1": "Empanada rellena de carne de res.",           
+        "price": "1.500"
+      },     
+      {
+        "title": "De pollo",
+        "ingredient1": "Empanada rellena de pollo.",           
+        "price": "1.500"
+      }  
+       
+    ],
+    "title7": "Alitas de pollo",
+    "image7": "./images/products/Alitas BBQ.webp",
+    "card7": [
+      {
+        "title": "Combo de 8 alitas",
+        "ingredient1": "8 Alitas de pollo frito con salsa BBQ.",           
+        "price": "30.000"
+      },     
+      {
+        "title": "Combo 4 alitas",
+        "ingredient1": "4 Alitas de pollo frito con salsa BBQ.",           
+        "price": "17.000"
+      }       
+    ],
+    "title8": "Crispetas de pollo",
+    "image8": "./images/products/Crispetas de pollo3.webp",
+    "card8": [
+      {
+        "title": "Combo 10 piezas",
+        "ingredient1": "10 Piezas de crispetas de pollo.",           
+        "price": "15.000"
+      },     
+      {
+        "title": "Combo 20 piezas",    
+        "ingredient1": "20 Piezas de crispetas de pollo.",               
+        "price": "11.500"
+      }
+      
+    ],
+    "title9": "Papitas fritas de la casa",
+    "image9": "./images/products/Papitas.webp",
+    "card9": [
+      {
+        "title": "Combo 5 piezas",
+        "ingredient1": "5 Piezas de papitas fritas con salsa de tomate.",           
+        "price": "5.000"
+      }
+    ],
+     "title10": "Ensalada saludable",
+    "image10": "./images/products/Ensaladas.webp",
+    "card10": [
+      {
+        "title": "Porcion de ensalada",
+        "ingredient1": "Aguacate, tomate, lechuga, pepino, cebolla, aceitunas.",           
+        "price": "7.000"
+      }
+    ],
+    "title11": "Gaseosas",
+    "image11": "./images/products/Bebidas gaseosas.webp",
+    "card11": [
+      {
+        "title": "Cocacola personal",       
+        "price": "3.000"
+      },
+      {
+        "title": "Cocacola zero personal",       
+        "price": "2.500"
+      },
+      {
+        "title": "Colombiana personal",       
+        "price": "3.000"
+      },
+      {
+        "title": "Jugos hit",       
+        "price": "3.500"
+      },
+      {
+        "title": "Agua en botella",       
+        "price": "1.500"
+      }
+    ],
+    "title12": "Sodas caseras",
+    "image12": "./images/products/Bebidas caseras.webp",
+    "card12": [
+      {
+        "title": "Soda de cereza",       
+        "price": "3.000"
+      },
+      {
+        "title": "Soda de piña",       
+        "price": "3.000"
+      },
+      {
+        "title": "Soda de naranja",       
+        "price": "3.000"
+      }
+    ]               
+  }
+}

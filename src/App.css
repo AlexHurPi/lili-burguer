@@ -1,0 +1,74 @@
+  /* Reset base para que los componentes hereden correctamente */
+@font-face{    
+    font-family:jost;
+    src: url(fonts/static/Jost-ExtraLight.ttf);
+}
+@font-face{    
+    font-family:jost-bold;
+    src: url(fonts/static/Jost-Bold.ttf);
+}
+
+:root {
+  /* Colores */
+  --header-title:white;  
+  --title: white;
+  --subtitle: #FF5722;
+  --text: white;
+  --vivid1:#FF5722;/** para textos que resalten o elementos destacados */
+  --vivid2:#E414D6;/** para textos que resalten o elementos destacados */
+  --vivid3:#f00909;/** para textos que resalten o elementos destacados */  
+  --background-food: linear-gradient(135deg, #FF4E50 0%, #F9D423 100%);/**requiere que la propiedad sea background y no background-color ya que se toma como si fuera una imagen*/
+  --background-dark: linear-gradient(180deg, #111827 0%, #1F2937 100%);/**requiere que la propiedad sea background y no background-color ya que se toma como si fuera una imagen*/
+  --background-light: #ffffff;/**requiere que la propiedad sea background-color y no background*/   
+
+  /* Tipografías */
+  --font-base: 'jost', sans-serif;
+  --font-bold: 'jost-bold', sans-serif;
+
+  /* Tamaños globales */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3rem;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+img, picture, video,canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+button, input, textarea, select {
+  font: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100%;
+  background: var(--background-food);
+  flex: 1;  
+  
+}
+body{
+  overflow-x: hidden;
+}
+

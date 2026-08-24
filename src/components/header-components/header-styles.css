@@ -1,0 +1,44 @@
+/* header-styles.css */
+.header {  
+  display: flex;  
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);   
+}
+.header-mainContainer {  
+  display: flex;  
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; 
+  width: 100%;
+  margin: 0 auto;
+  gap: 1rem;
+  flex-wrap: nowrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */
+  padding: 0.5rem;
+}
+.header-textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  background-color: rgba(5, 5, 32, 0.575);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;  
+}
+.header-subtitle {
+  font-size: 1.25rem;   
+}
+
+@media (max-width: 600px) {
+  .header-mainContainer {
+    padding-top: 1rem;
+    justify-content: start; 
+  }
+}
