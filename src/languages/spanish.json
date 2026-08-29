@@ -1,13 +1,13 @@
 {
   "header": {
-    "title": "Lili Burguers",
+    "title": "Lili Burguer",
     "subtitle": "TU ANTOJO, AL INSTANTE",
     "image": "./images/Encabezado.webp"
   },
   "footer": {
     "infofooter": [
       {
-          "empresa": "Lili Burguers",
+          "empresa": "Lili Burguer",
           "slogan": "Tu antojo, al instante",
           "razonsocial": "",
           "nit": "",
