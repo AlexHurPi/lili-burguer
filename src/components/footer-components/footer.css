@@ -1,10 +1,10 @@
 .footer{
   margin-top: 2rem;
-  width: 100%;
-  background: var(--background-dark);
+  width: 100%;  
   color: var(--subtitle);  
   text-align: center;
   font-family: var(--font-base);
+  background: var(--background-dark);
 }
 .footer-mainContainer {
   padding-block: 1rem;

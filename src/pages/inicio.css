@@ -1,10 +1,45 @@
 .inicio-mainContainer{
-    display:flex;
+    display: flex;
     flex-direction: column;
+    width: 100%;     
+    height: 100%;
+    flex-wrap: wrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: center;
+    align-items: center;  
+}
+.inicio-link{
+    display: flex;
     width: 100%;
-    /*max-width: 500px;    */
-      
+    height: 100%;
+    flex-wrap: wrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;    
+}
+.card{    
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   height: 100%;
+   flex-wrap: wrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */
+   justify-content: center;
+   align-items: center;   
+}
+/*
+.carousel{     
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    flex-wrap: wrap; 
     justify-content: center;
     align-items: center;   
-    /*background-color: var(--secondary); */
 }
+
+/* RESPONSIVO */
+/*
+@media (max-width: 768px) {
+  .carousel{
+    max-width: 400px;
+  }
+}
+  */

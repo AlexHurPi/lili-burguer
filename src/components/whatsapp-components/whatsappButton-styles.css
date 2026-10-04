@@ -1,7 +1,7 @@
 .whatsapp-container {   
     position: fixed;
     bottom: 210px;
-    right: calc(50vw - 360px);
+    right: calc(50vw - 360px);/* 360px es la mitad del ancho de la pantalla y el 50vw es la mitad de la pantalla*/
     z-index: 1000;    
 }
 .whatsapp-container h3 {
@@ -13,8 +13,8 @@
     margin: 0;
     background-color: transparent;
     border: none;    
-    width: 70px;
-    height: 70px;     
+    width: 60px;
+    height: 60px;     
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }

@@ -1,47 +1,76 @@
 import React from "react";
 import "./footer.css";
-import { useTranslation } from "react-i18next";
-import Redes from "../redes-sociales/redes";
+import Redes from "../redes-sociales/Redes";
+import { useMenu } from '../../context/MenuContext';
 
-export default function Footer({background, dataKey}) {
-  const year = new Date().getFullYear();
-  const { t } = useTranslation();
-  const rawinformation = t(dataKey, { returnObjects: true });
-  const information = Array.isArray(rawinformation) ? rawinformation : [];
+export const Footer = () => {
+  const year = new Date().getFullYear();  
+  const { menuData } = useMenu();
+
+  const footerInfo = menuData?.footer || {};
+  const {
+    empresa = 'Lili-Hamburger',
+    slogan = 'Tu antojo, al instante',
+    razonsocial = '',
+    nit = '',
+    dondeestamos = '¿Dónde estamos?',
+    ubicacion = 'Somos una tienda virtual ubicada en el norte de Cali - Valle del Cauca.',
+    direccion = '',
+    correo = '',
+    telefono = '+57 3228737508',
+    redessociales = 'Síguenos en nuestras redes sociales:',
+    facebook = '',
+    instagram = '',
+    tiktok = '',
+    twitter = '',
+    youtube = '',
+    final = 'Lili-Hamburger.'
+  } = footerInfo;
+
+  // Limpiamos el teléfono para el enlace tel: (solo números y +)
+  const telClean = telefono.replace(/[^0-9+]/g, '');
 
   return (
-    <footer className="footer" style={{ backgroundColor: background }}>
-      {information.map((info, index) => (
-      <React.Fragment key={index}>      
+    <footer className="footer">
       <div className="footer-mainContainer">
-        <div className="company-info-container">         
-            <div className="name-info">
-              {info.empresa && <strong>{info.empresa}</strong>}
-              {info.slogan && <small >{info.slogan}</small>}
-              {info.razonsocial && <small >{info.razonsocial}</small>}
-              {info.nit && <small >{info.nit}</small>}
-            </div>
-            
-            <div className="location-info">
-              {info.dondeestamos && <strong>{info.dondeestamos}</strong>}             
-              {info.ubicacion && <small>{info.ubicacion}</small>}             
-              {info.direccion && <small>{info.direccion}</small>}            
-              {info.correo && <small>📧 {info.correo}</small>}             
-              {info.telefono && <small>📞 {info.telefono}</small>}
-            </div>            
+        <div className="company-info-container">        
+          <div className="name-info">
+            {empresa && <strong>{empresa}</strong>}
+            {slogan && <small>{slogan}</small>}
+            {razonsocial && <small>{razonsocial}</small>}
+            {nit && <small>{nit}</small>}
+          </div>
+          
+          <div className="location-info">
+            {dondeestamos && <strong>{dondeestamos}</strong>}            
+            {ubicacion && <small>{ubicacion}</small>}            
+            {direccion && <small>{direccion}</small>}            
+            {correo && (
+              <small>
+                📧 <a href={`mailto:${correo}`}>{correo}</a>
+              </small>
+            )}            
+            {telefono && (
+              <small>
+                📞 <a href={`tel:${telClean}`}>{telefono}</a>
+              </small>
+            )}
+          </div>            
         </div>
+
         <div className="social-media">
-              <h4>{info.redessociales}</h4>
-              <Redes />            
-            </div>
-        <div ></div>
-        <hr className="divider"/>
+          {redessociales && <h4>{redessociales}</h4>}
+          <Redes socialData={{ facebook, instagram, tiktok, twitter, youtube }} />            
+        </div>
+
+        <hr className="divider" />
+
         <div className="final-info">
-          <small>&copy; {year} {info.final}</small>
+          <small>&copy; {year} {final}</small>
         </div>
       </div>
-      </React.Fragment>
-      ))}
     </footer>
   );
-}
+};
+
+export default Footer;

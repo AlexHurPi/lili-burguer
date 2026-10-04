@@ -1,0 +1,15 @@
+.backTo-container{ 
+    position: fixed;
+    z-index: 1000;
+    top: 7em;    
+    right: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.backTo-container img{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    flex-wrap: wrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */    
+}

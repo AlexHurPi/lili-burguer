@@ -1,0 +1,1 @@
+This component consist of an icon image that gets you to the main page or home page

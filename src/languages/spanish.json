@@ -1,200 +1,435 @@
 {
   "header": {
-    "title": "Lili Burguer",
+    "title": "Lili-Hamburger",
     "subtitle": "TU ANTOJO, AL INSTANTE",
     "image": "./images/Encabezado.webp"
   },
   "footer": {
-    "infofooter": [
-      {
-          "empresa": "Lili Burguer",
-          "slogan": "Tu antojo, al instante",
-          "razonsocial": "",
-          "nit": "",
-          "dondeestamos": "¿Dónde estamos?",
-          "ubicacion": "Somos una tienda virtual ubicada en el norte de Cali - Valle del cauca.",
-          "direccion": "",
-          "correo": "",
-          "telefono": "Teléfono: +57 3236018171 ",
-          "redessociales": "Síguenos en nuestras redes sociales:",
-          "facebook": "https://www.facebook.com/",
-          "twitter": "enlace a Twitter",
-          "instagram": "https://www.instagram.com/",
-          "youtube": "",
-          "tiktok": "",
-          "final": "Lili Burguers."
-      }
-  ]
+    "empresa": "Lili-Hamburger",
+    "slogan": "Tu antojo, al instante",
+    "razonsocial": "",
+    "nit": "",
+    "dondeestamos": "¿Dónde estamos?",
+    "ubicacion": "Somos una tienda virtual ubicada en el norte de Cali - Valle del cauca.",
+    "direccion": "",
+    "correo": "",
+    "telefono": "Teléfono: +57 3228737508",
+    "redessociales": "Síguenos en nuestras redes sociales:",
+    "facebook": "https://www.facebook.com/",
+    "twitter": "",
+    "instagram": "https://www.instagram.com/",
+    "youtube": "",
+    "tiktok": "https://www.tiktok.com/",
+    "final": "Lili-Hamburger."
+  },
+  "storeStatus": {
+    "_instructions": "Opciones para manualOverride: 'none' (automático según horario), 'force_open' (forzar siempre abierta), 'force_closed' (forzar cierre de emergencia).",
+    "isAutoSchedule": true,
+    "manualOverride": "none",
+    "whatsappNumber": "573228737508",
+    "schedule": [
+      { "day": 0, "dayName": "Domingo", "isOpen": true, "openTime": "16:00", "closeTime": "23:00" },
+      { "day": 1, "dayName": "Lunes", "isOpen": true, "openTime": "16:00", "closeTime": "23:00" },
+      { "day": 2, "dayName": "Martes", "isOpen": false, "openTime": "", "closeTime": "" },
+      { "day": 3, "dayName": "Miércoles", "isOpen": true, "openTime": "16:00", "closeTime": "23:00" },
+      { "day": 4, "dayName": "Jueves", "isOpen": true, "openTime": "16:00", "closeTime": "23:00" },
+      { "day": 5, "dayName": "Viernes", "isOpen": true, "openTime": "16:00", "closeTime": "01:00" },
+      { "day": 6, "dayName": "Sábado", "isOpen": true, "openTime": "16:00", "closeTime": "01:00" }
+    ],
+    "messages": {
+      "openBanner": "🟢 ¡Estamos Abiertos! Toma tu pedido ahora",
+      "closedBanner": "🔴 Tienda Cerrada • Abrimos a las 4:00 PM. ¡Puedes programar tu pedido!",
+      "closedCartNotice": "En este momento la cocina está cerrada. Tu pedido se registrará como PROGRAMADO para ser despachado cuando abramos.",
+      "scheduledOrderHeader": "📌 *PEDIDO PROGRAMADO* (Para entregar en el próximo horario de atención)",
+      "whatsappHeader": "📋 *¡Hola! Quiero hacer el siguiente pedido:*",
+      "whatsappFooter": "¡Quedo atento para coordinar el pago y el envío!",
+      "deliveryNotice": "¡Domicilios cercanos son gratis!",
+      "whatsappInfoNotice": "Haciendo clic en el botón de abajo, podrás enviar tu pedido por WhatsApp, allí te enviamos información para coordinar el pago y el envío.",
+      "checkoutBtnOpen": "HAZ TU PEDIDO",
+      "checkoutBtnClosed": "📌 PROGRAMAR PEDIDO POR WHATSAPP",
+      "outOfStockNotice": "⚠️ Producto agotado por el momento. No se incluirá en la orden.",
+      "notePlaceholder": "Sugerencia (ej: sin cebolla, salsa aparte...)"
+    }
   },
   "cards": {
-    "title1": "Hamburguesas",
-    "image1": "./images/products/Hamburguesa.webp",
     "card1": [
       {
-        "title": "Clasica",
-        "ingredient1": "Pan, carne angus.",
-        "product1": "",
-        "product2": "",
-        "price": "15.000"
+        "id": "burg_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Hamburguesas",
+        "productTitle": "Clasica Sencilla",
+        "image": "./images/products/Hamburguesa3.webp",
+        "description": "Pan mantequilla (80 g), queso loncha mozzarella, tocineta, carne de res, cebolla caramelizada, lechuga, tomate.",
+        "regularPrice": "18.000",
+        "offerPrice": "12.000",
+        "discountBadge": "33% OFF",
+        "badgeText": "OFERTA ESPECIAL",
+        "days": [0, 1, 2, 3, 4, 5, 6],
+        "startHour": "",
+        "endHour": ""
       },
       {
-        "title": "Economica (mas pequeña)",
-        "ingredient1": "Pan, carne angu.s",
-        "product1": "",
-        "product2": "",
-        "price": "10.000"
-      }  
+        "id": "burg_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Hamburguesas",
+        "productTitle": "Clasica Doble carne",
+        "image": "./images/products/Hamburguesa-doble.webp",
+        "description": "Pan mantequilla (80 g), queso loncha mozzarella, tocineta, doble porción de carne de res, cebolla caramelizada, lechuga, tomate.",
+        "regularPrice": "18.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "burg_03",
+        "order": 3,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Hamburguesas",
+        "productTitle": "Economica (mas pequeña)",
+        "image": "./images/products/Hamburguesa2.webp",
+        "description": "Pan mantequilla (60 g), queso loncha mozzarella, tocineta, carne de res, cebolla caramelizada, lechuga, tomate.",
+        "regularPrice": "12.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
     ],
-    
-    "title2": "Perro caliente",
-    "image2": "./images/products/Perro Lili.webp",
     "card2": [
       {
-        "title": "Clasico",
-        "ingredient1": "Pan, salchicha, cebolla y queso.",        
-        "price": "13.000"
+        "id": "dog_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Perro caliente",
+        "productTitle": "Clasico",
+        "image": "./images/products/Perro Lili.webp",
+        "description": "Pan, salchicha, cebolla y queso.",
+        "regularPrice": "13.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       },
       {
-        "title": "Economico (mas pequeño)",
-        "ingredient1": "Pan, salchicha, cebolla y queso.",
-        "price": "8.000"
-      }      
+        "id": "dog_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Perro caliente",
+        "productTitle": "Economico (mas pequeño)",
+        "image": "",
+        "description": "Pan, salchicha, cebolla y queso.",
+        "regularPrice": "8.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
     ],
-    "title3": "Sndwiches",
-    "image3": "./images/products/Sandwich.webp",
     "card3": [
       {
-        "title": "Clasico",
-        "product1": "Grande",
-        "product2": "Mediano",
-        "product3": "Pequeño",
-        "price": "20.000 - 15.000 - 10.000"        
-      }     
+        "id": "sand_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Sandwiches",
+        "productTitle": "Clasico",
+        "image": "./images/products/Sandwich.webp",
+        "description": "Sandwich clásico con queso y jamón.",
+        "regularPrice": "20.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
     ],
-    "title4": "Salchipapas",
-    "image4": "./images/products/Salchipapa2.webp",
-    "card4": [
-      {
-        "title": "Grande",
-        "ingredient1": "Papa frita, salchicha, cebolla y queso.",           
-        "price": "15.000"
-      },    
-      {
-        "title": "Economica (mas pequeña)",
-        "ingredient1": "Papa frita, salchicha, cebolla y queso.",           
-        "price": "10.000"
-      }      
-    ],
-    "title5": "Canastas de platano",
-    "image5": "./images/products/Canastas de platano.webp",
-    "card5": [
-      {
-        "title": "Clasicas",
-        "ingredient1": "2 Canastas de platano con carne desmechada y guacamole.",           
-        "price": "16.000"
-      }     
-    ],
-    "title6": "Empanadas",
-    "image6": "./images/products/Empanadas2.webp",
-    "card6": [
-      {
-        "title": "De carne",
-        "ingredient1": "Empanada rellena de carne de res.",           
-        "price": "1.500"
-      },     
-      {
-        "title": "De pollo",
-        "ingredient1": "Empanada rellena de pollo.",           
-        "price": "1.500"
-      }  
-       
-    ],
-    "title7": "Alitas de pollo",
-    "image7": "./images/products/Alitas BBQ.webp",
-    "card7": [
-      {
-        "title": "Combo de 8 alitas",
-        "ingredient1": "8 Alitas de pollo frito con salsa BBQ.",           
-        "price": "30.000"
-      },     
-      {
-        "title": "Combo 4 alitas",
-        "ingredient1": "4 Alitas de pollo frito con salsa BBQ.",           
-        "price": "17.000"
-      }       
-    ],
-    "title8": "Crispetas de pollo",
-    "image8": "./images/products/Crispetas de pollo3.webp",
     "card8": [
       {
-        "title": "Combo 10 piezas",
-        "ingredient1": "10 Piezas de crispetas de pollo.",           
-        "price": "15.000"
-      },     
-      {
-        "title": "Combo 20 piezas",    
-        "ingredient1": "20 Piezas de crispetas de pollo.",               
-        "price": "11.500"
+        "id": "plat_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Canastas de platano",
+        "productTitle": "Clasicas",
+        "image": "./images/products/Canastas de platano.webp",
+        "description": "2 Canastas de platano con carne desmechada y guacamole.",
+        "regularPrice": "16.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       }
-      
     ],
-    "title9": "Papitas fritas de la casa",
-    "image9": "./images/products/Papitas.webp",
     "card9": [
       {
-        "title": "Combo 5 piezas",
-        "ingredient1": "5 Piezas de papitas fritas con salsa de tomate.",           
-        "price": "5.000"
+        "id": "emp_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Empanadas",
+        "productTitle": "De carne",
+        "image": "./images/products/Empanadas2.webp",
+        "description": "Empanada rellena de carne de res.",
+        "regularPrice": "1.500",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "emp_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Empanadas",
+        "productTitle": "De pollo",
+        "image": "",
+        "description": "Empanada rellena de pollo.",
+        "regularPrice": "1.500",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       }
     ],
-     "title10": "Ensalada saludable",
-    "image10": "./images/products/Ensaladas.webp",
     "card10": [
       {
-        "title": "Porcion de ensalada",
-        "ingredient1": "Aguacate, tomate, lechuga, pepino, cebolla, aceitunas.",           
-        "price": "7.000"
+        "id": "wings_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Alitas de pollo",
+        "productTitle": "Combo de 8 alitas",
+        "image": "./images/products/Alitas BBQ.webp",
+        "description": "8 Alitas de pollo frito con salsa BBQ.",
+        "regularPrice": "30.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "wings_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Alitas de pollo",
+        "productTitle": "Combo 4 alitas",
+        "image": "",
+        "description": "4 Alitas de pollo frito con salsa BBQ.",
+        "regularPrice": "17.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       }
     ],
-    "title11": "Gaseosas",
-    "image11": "./images/products/Bebidas gaseosas.webp",
     "card11": [
       {
-        "title": "Cocacola personal",       
-        "price": "3.000"
+        "id": "pop_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Crispetas de pollo",
+        "productTitle": "Combo 10 piezas",
+        "image": "./images/products/Crispetas de pollo3.webp",
+        "description": "10 Piezas de crispetas de pollo.",
+        "regularPrice": "15.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       },
       {
-        "title": "Cocacola zero personal",       
-        "price": "2.500"
-      },
-      {
-        "title": "Colombiana personal",       
-        "price": "3.000"
-      },
-      {
-        "title": "Jugos hit",       
-        "price": "3.500"
-      },
-      {
-        "title": "Agua en botella",       
-        "price": "1.500"
+        "id": "pop_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Crispetas de pollo",
+        "productTitle": "Combo 20 piezas",
+        "image": "",
+        "description": "20 Piezas de crispetas de pollo.",
+        "regularPrice": "11.500",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       }
     ],
-    "title12": "Sodas caseras",
-    "image12": "./images/products/Bebidas caseras.webp",
     "card12": [
       {
-        "title": "Soda de cereza",       
-        "price": "3.000"
-      },
-      {
-        "title": "Soda de piña",       
-        "price": "3.000"
-      },
-      {
-        "title": "Soda de naranja",       
-        "price": "3.000"
+        "id": "house_fries_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Papas fritas de la casa",
+        "productTitle": "Combo 5 piezas",
+        "image": "./images/products/Papitas.webp",
+        "description": "5 Piezas de papitas fritas con salsa de tomate.",
+        "regularPrice": "5.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
       }
-    ]               
+    ],
+    "card13": [
+      {
+        "id": "salad_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Ensalada saludable",
+        "productTitle": "Porcion de ensalada",
+        "image": "./images/products/Ensaladas.webp",
+        "description": "Aguacate, tomate, lechuga, pepino, cebolla, aceitunas.",
+        "regularPrice": "7.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
+    ],
+    "card14": [
+      {
+        "id": "soda_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Gaseosas",
+        "productTitle": "Cocacola personal",
+        "image": "./images/products/Bebidas gaseosas.webp",
+        "description": "Bebida gaseosa refrescante 350ml.",
+        "regularPrice": "3.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "soda_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Gaseosas",
+        "productTitle": "Cocacola zero personal",
+        "image": "",
+        "description": "Bebida gaseosa sin azúcar 350ml.",
+        "regularPrice": "2.500",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "soda_03",
+        "order": 3,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Gaseosas",
+        "productTitle": "Colombiana personal",
+        "image": "",
+        "description": "Bebida gaseosa 350ml.",
+        "regularPrice": "2.500",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
+    ],
+    "card15": [
+      {
+        "id": "soda_craft_01",
+        "order": 1,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Sodas caseras",
+        "productTitle": "Soda de cereza",
+        "image": "./images/products/Bebidas caseras.webp",
+        "description": "Soda artesanal de cereza.",
+        "regularPrice": "3.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "soda_craft_02",
+        "order": 2,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Sodas caseras",
+        "productTitle": "Soda de piña",
+        "image": "",
+        "description": "Soda artesanal de piña.",
+        "regularPrice": "3.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      },
+      {
+        "id": "soda_craft_03",
+        "order": 3,
+        "available": true,
+        "stock": true,
+        "categoryTitle": "Sodas caseras",
+        "productTitle": "Soda de naranja",
+        "image": "",
+        "description": "Soda artesanal de naranja.",
+        "regularPrice": "3.000",
+        "offerPrice": "",
+        "discountBadge": "",
+        "badgeText": "",
+        "days": [],
+        "startHour": "",
+        "endHour": ""
+      }
+    ]
   }
 }

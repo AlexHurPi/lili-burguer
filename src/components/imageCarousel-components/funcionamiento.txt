@@ -1,0 +1,2 @@
+La data de este carrusel de imagenes debe quedar en un JSON que maneja el idioma de la pagina, ese JSON se debe 
+manejar con la logica del archivo i18n.js y debe haber uno para cada idioma

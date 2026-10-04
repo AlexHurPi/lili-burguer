@@ -1,0 +1,52 @@
+//Este es el JSON del carrusel pero en este caso no esta en uso ya que los datos estan en otro archivo para manejo de idiomas
+[
+  {
+    "id": 1,
+    "image": "images/Imagen1.png",
+    "title": "Auriculares Premium",
+    "description": "Sonido cristalino con cancelación de ruido activa. Batería de 30 horas.",
+    "price": "$299"
+  },
+  {
+    "id": 2,
+    "image": "images/Imagen2.png",
+    "title": "Smartwatch Pro",
+    "description": "Monitoreo completo de salud con GPS integrado. Resistente al agua 50m.",
+    "price": "$199"
+  },
+  {
+    "id": 3,
+    "image": "images/Imagen3.png",
+    "title": "Laptop Gaming Ultra",
+    "description": "RTX 4070, 32GB RAM, pantalla 144Hz. Rendimiento extremo para gaming.",
+    "price": "$1,499"
+  },
+  {
+    "id": 4,
+    "image": "images/Imagen4.png",
+    "title": "Cámara Mirrorless",
+    "description": "Sensor full-frame 45MP. Video 8K y estabilización avanzada.",
+    "price": "$2,199"
+  },
+  {
+    "id": 5,
+    "image": "images/Imagen5.png",
+    "title": "Tablet Pro 12.9\"",
+    "description": "M1 chip, pantalla Liquid Retina XDR. Perfecta para diseño y edición.",
+    "price": "$999"
+  },
+  {
+    "id": 6,
+    "image": "images/Imagen6.png",
+    "title": "Tablet Pro 12.9\"",
+    "description": "M1 chip, pantalla Liquid Retina XDR. Perfecta para diseño y edición.",
+    "price": "$999"
+  },
+  {
+    "id": 7,
+    "image": "images/Imagen7.png",
+    "title": "Tablet Pro 12.9\"",
+    "description": "M1 chip, pantalla Liquid Retina XDR. Perfecta para diseño y edición.",
+    "price": "$999"
+  }
+]

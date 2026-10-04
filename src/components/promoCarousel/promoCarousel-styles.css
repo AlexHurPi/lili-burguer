@@ -1,0 +1,352 @@
+/**=======================================================================
+**                          CONTENEDOR GENERAL
+**  ========================================================================== */
+
+/* Contenedor principal del carrusel promocional */
+.promo-carousel-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  font-family: 'Jost', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Divisor con contenedor de luz / Destello metálico */
+.promo-header-divider {
+  position: relative; /* Posiciona la luz dentro del contenedor */
+  overflow: hidden;   /* Mantiene el reflejo dentro de los bordes */
+  background: linear-gradient(135deg, #FFD700 0%, #FF4E50 50%, #D81159 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  padding: 10px 5px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0.5rem;
+  box-shadow: 0 4px 12px rgba(255, 78, 80, 0.4);
+}
+
+/* Pseudo-elemento que genera la ola de luz */
+.promo-header-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: lightWave 2s infinite ease-in-out;
+}
+
+/* Animación de destello brillante */
+@keyframes lightWave {
+  0% {
+    left: -100%;
+  }
+  30% {
+    left: 200%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.promo-header-divider h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-family: jost-bold, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+
+/**=======================================================================
+**                  WRAPPER Y ESTRUCTURA DEL CARRUSEL
+**  ========================================================================== */
+
+/* Marco exterior del carrusel */
+.promo-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0.5em;
+  border-radius: 12px;
+  background-color: #1a2225;
+  border: 1px solid #ff4e3e;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Contador flotante de diapositivas */
+.promo-carousel-counter {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 5;
+}
+
+/* Pista desplazable donde se montan las tarjetas */
+.promo-carousel-track {
+  display: flex;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* Diapositiva / Tarjeta individual */
+.promo-card-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 35px 15px 15px 15px; /* Padding superior para alojar las badges flotantes */
+  position: relative;
+}
+
+
+/**=======================================================================
+**                  ETIQUETAS Y DETALLES DE PRODUCTO
+**  ========================================================================== */
+
+/* Etiquetas/Badges flotantes en esquina superior derecha */
+.promo-badges-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.promo-badge-tag {
+  background-color: #ff4e3e;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.promo-badge-off {
+  background-color: #ffe8e3;
+  color: #ff4e3e;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Disposición interna del contenido de la tarjeta */
+.promo-card-body {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Imagen del producto promocional */
+.promo-image-container {
+  flex: 0 0 110px;
+  height: 110px;
+  background-color: #d1e2f3;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Columna de información textual */
+.promo-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.promo-title {
+  margin: 0 0 4px 0;
+  color: #ff4e3e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.promo-description {
+  margin: 0 0 8px 0 !important;
+  color: #d1d5db !important;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/**=======================================================================
+**              CONTROLES DE PRECIO, BOTONES Y NAVEGACIÓN
+**  ========================================================================== */
+
+/* Fila de precios */
+.promo-price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.promo-current-price {
+  color: #ff4e3e;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.promo-old-price {
+  color: #9ca3af;
+  text-decoration: line-through;
+  font-size: 0.85rem;
+}
+
+/* Fila de controles y acciones */
+.promo-actions-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;  
+}
+
+.promo-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.promo-qty-btn {
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s ease;
+}
+
+.promo-qty-btn:active {
+  transform: scale(0.9);
+}
+
+.promo-qty-btn.minus {
+  background-color: #d1d5db;
+  color: #1a2225;
+}
+
+.promo-qty-btn.plus {
+  background-color: #ff4e3e;
+  color: white;
+}
+
+.promo-qty-number {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Botón Agregar al Carrito */
+.promo-btn-add {
+  background-color: transparent;
+  border: 1px solid #ff4e3e;
+  color: #ff4e3e;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.promo-btn-add:hover:not(:disabled) {
+  background-color: #ff4e3e;
+  color: white;
+}
+
+.promo-btn-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Flechas laterales de navegación */
+.promo-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(26, 34, 37, 0.8);
+  color: #ff4e3e;
+  border: 1px solid #ff4e3e;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.promo-nav-btn:hover {
+  background-color: #ff4e3e;
+  color: #ffffff;
+}
+
+.promo-nav-btn.prev-btn { left: 5px; }
+.promo-nav-btn.next-btn { right: 5px; }
+
+
+/**=======================================================================
+**                             RESPONSIVE
+**  ========================================================================== */
+
+/* Ajuste para móviles con pantallas muy reducidas */
+@media (max-width: 350px) {
+  .promo-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .promo-btn-add {
+    width: 100%;
+    text-align: center;
+  }
+}

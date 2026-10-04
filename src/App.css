@@ -3,14 +3,15 @@
     font-family:jost;
     src: url(fonts/static/Jost-ExtraLight.ttf);
 }
-@font-face{    
-    font-family:jost-bold;
-    src: url(fonts/static/Jost-Bold.ttf);
-}
 
+@font-face {
+  font-family: 'Jost-Bold';
+  src: url('/fonts/static/Jost-Bold.ttf');
+}
 :root {
   /* Colores */
-  --header-title:white;  
+  --header-title:white; 
+  --header-subtitle:rgba(255, 255, 255, 0.568); 
   --title: white;
   --subtitle: #FF5722;
   --text: white;
@@ -19,6 +20,8 @@
   --vivid3:#f00909;/** para textos que resalten o elementos destacados */  
   --background-food: linear-gradient(135deg, #FF4E50 0%, #F9D423 100%);/**requiere que la propiedad sea background y no background-color ya que se toma como si fuera una imagen*/
   --background-dark: linear-gradient(180deg, #111827 0%, #1F2937 100%);/**requiere que la propiedad sea background y no background-color ya que se toma como si fuera una imagen*/
+  --background-cool: linear-gradient(180deg, gold 0%, orange 33%, #FF4E50 66%, rgb(41, 55, 58) 100%);
+  --background-colombia: linear-gradient(180deg, yellow 35%, blue 65%, red 100%);
   --background-light: #ffffff;/**requiere que la propiedad sea background-color y no background*/   
 
   /* Tipografías */

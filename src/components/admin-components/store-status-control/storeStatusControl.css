@@ -1,0 +1,232 @@
+/* Contenedor Tarjeta Módulo 2 */
+.store-control-card {
+  /*background-color: #1a2225;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;*/
+  /*padding: 24px;*/
+  /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);*/
+  color: #ffffff;
+}
+
+.store-control-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.store-control-header h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  color: #ff4e3e;
+}
+
+.store-control-header p {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 0.88rem;
+}
+
+/* Banners de Alerta Feedback */
+.status-alert-banner {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-alert-banner.success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border: 1px solid #28a745;
+  color: #51f08b;
+}
+
+.status-alert-banner.error {
+  background-color: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #ff6b6b;
+}
+
+/* Secciones del Formulario */
+.store-control-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Grilla de Botones de Sobreescritura */
+.override-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.override-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #242f34;
+  border: 2px solid #34444c;
+  border-radius: 10px;
+  padding: 14px 12px;
+  color: #cccccc;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.override-btn .btn-icon {
+  font-size: 1.4rem;
+}
+
+.override-btn .btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.override-btn .btn-text strong {
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.override-btn .btn-text small {
+  font-size: 0.75rem;
+  color: #8a99a0;
+}
+
+/* Estados Seleccionados */
+.override-btn.auto.selected {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+.override-btn.force-open.selected {
+  border-color: #28a745;
+  background-color: rgba(40, 167, 69, 0.15);
+}
+
+.override-btn.force-closed.selected {
+  border-color: #ff4e3e;
+  background-color: rgba(255, 78, 62, 0.15);
+}
+
+/* Inputs de Mensajes */
+.form-group-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group-admin label {
+  font-size: 0.82rem;
+  color: #cccccc;
+  font-weight: 600;
+}
+
+.form-group-admin input,
+.form-group-admin textarea {
+  padding: 12px;
+  background-color: #242f34;
+  border: 1px solid #34444c;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.form-group-admin input:focus,
+.form-group-admin textarea:focus {
+  border-color: #ff4e3e;
+}
+
+/* Botón Guardar */
+.btn-save-store-status {
+  background-color: #ff4e3e;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 8px;
+}
+
+.btn-save-store-status:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-save-store-status:hover:not(:disabled) {
+  background-color: #e03e2e;
+}
+
+/**================================================================*/
+/**             Estilos para Sección Desplegable */
+/**================================================================*/
+.admin-collapsible-section {
+  background-color: #242f34;
+  border: 1px solid #34444c;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.collapsible-title {
+  padding: 14px 16px;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e282c;
+}
+
+.collapsible-title span {
+  font-size: 0.75rem;
+  color: #8a99a0;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.collapsible-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 8px 0;
+}
+
+/**================================================================*/
+/**                       Adaptabilidad Móvil */
+/**================================================================*/
+
+@media (max-width: 600px) {
+  .store-control-card {
+    padding: 16px;
+  }
+
+  .override-options-grid {
+    grid-template-columns: 1fr;
+  }
+}

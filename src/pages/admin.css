@@ -1,0 +1,231 @@
+/* ==========================================
+   PANEL ADMINISTRATIVO (Lili-Hamburger)
+   Archivo: src/pages/admin.css
+   ========================================== */
+
+/* --- Layout Base --- */
+.admin-dashboard-container {
+  min-height: 100vh;
+  background-color: #12181b;
+  color: #ffffff;
+  font-family: 'Jost', system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Pantalla de Carga (Loading) --- */
+.admin-loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #12181b;
+  color: #ffffff;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #ff4e3e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Encabezado Superior (Navbar) --- */
+.admin-navbar {
+  background-color: #1a2225;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-navbar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-navbar-info h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.admin-user-email {
+  font-size: 0.82rem;
+  color: #a0a0a0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-btn-logout {
+  background-color: transparent;
+  border: 1px solid #ff4e3e;
+  color: #ff4e3e;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-btn-logout:hover {
+  background-color: #ff4e3e;
+  color: #ffffff;
+}
+
+.admin-btn-logout:active {
+  transform: scale(0.97);
+}
+/**========================================================================*/
+/**   --- Menú de Pestañas Navegación (Mobile First & Responsivo) --- */
+/**========================================================================*/
+.admin-tab-nav {
+  display: flex;
+  background-color: #1a2225;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 12px;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  /* Ocultar barra de scroll nativa para acabado limpio de App */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-tab-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-tab-nav::-webkit-scrollbar-thumb {
+  background-color: #ff4e3e;
+  border-radius: 4px;
+}
+
+.tab-btn {
+  flex: 1 0 auto;
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  padding: 12px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+}
+
+.tab-btn.active {
+  color: #ff4e3e;
+  border-bottom: 3px solid #ff4e3e;
+}
+
+/* --- Contenedor de Contenido Principal --- */
+.admin-content-wrapper {
+  padding: 20px 16px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.tab-content-placeholder {
+  background-color: #1a2225;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  margin-top: 8px;
+}
+
+.tab-content-placeholder h3 {
+  margin-top: 0;
+  color: #ff4e3e;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.tab-content-placeholder p {
+  color: #bbbbbb;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Adaptabilidad en Pantallas Pequeñas (Móviles) --- */
+@media (max-width: 600px) {
+  .admin-navbar {
+    padding: 12px 16px;
+  }
+
+  .admin-navbar-info h1 {
+    font-size: 1.1rem;
+  }
+
+  .admin-user-email {
+    font-size: 0.78rem;
+  }
+
+  .admin-btn-logout {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .tab-btn {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+
+  .admin-content-wrapper {
+    padding: 16px 12px;
+  }
+
+  .tab-content-placeholder {
+    padding: 18px 16px;
+  }
+}
+/* Ajuste específico para celulares (< 480px) */
+@media (max-width: 480px) {
+  .admin-tab-nav {
+    padding: 0 6px;
+    gap: 2px;
+  }
+
+  .tab-btn {
+    padding: 12px 6px;
+    font-size: 0.78rem; /* Garantiza que los 3 módulos quepan completos sin cortarse */
+    gap: 4px;
+  }
+}
