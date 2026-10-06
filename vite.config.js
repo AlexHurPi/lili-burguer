@@ -3,22 +3,22 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
- // base: '/lili-burguer/',
- base: '/', // se deja asi para que funcione en cloudflare pages debido a que no se puede poner /lili-burguer/
+  // base: '/lili-burguer/', // Raíz para GitHub Pages
+  base: '/', // Raíz para Cloudflare Pages
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icono-192.png', 'icono-512.png', 'imagen-compartir.jpg'],
       manifest: {
-        name: 'Lili Admin', // Puedes cambiar el nombre para distinguirla de la app de clientes
+        name: 'Lili Admin',
         short_name: 'Lili Admin',
         description: 'Panel de administración de Lili Burguer',
         theme_color: '#ff4e3e',
         background_color: '#1a2225',
         display: 'standalone',
-        // 👇 AQUÍ ESTÁ EL CAMBIO CLAVE: Agregamos el hash y la ruta
-        start_url: '/lili-burguer/#/admin', 
+        // 👇 Se quita /lili-burguer/ de la ruta de inicio
+        start_url: '/#/admin', 
         icons: [
           {
             src: 'icono-192.png',
