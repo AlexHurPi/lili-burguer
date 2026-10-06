@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/lili-burguer/',
+ // base: '/lili-burguer/',
+ base: '/', // se deja asi para que funcione en cloudflare pages debido a que no se puede poner /lili-burguer/
   plugins: [
     react(),
     VitePWA({

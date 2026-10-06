@@ -3,6 +3,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import './storeStatusControl.css';
+import StoreScheduleControl from './StoreScheduleControl'; // Importamos el subcomponente de Horario Semanal
 
 const StoreStatusControl = () => {
   const { menuData } = useMenu();
@@ -158,6 +159,9 @@ const DEFAULT_MESSAGES = {
           </div>
         </div>
 
+        {/* 📅 SUBCOMPONENTE: Configuración de Horario Semanal */}
+        <StoreScheduleControl />
+        
         {/* SECCIÓN 2: MENSAJES Y CONTACTO EDITABLES (DESPLEGABLE) */}
         <div className="control-section">
           <details className="admin-collapsible-section">

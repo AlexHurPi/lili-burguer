@@ -217,6 +217,146 @@
   margin: 8px 0;
 }
 
+
+/**================================================================
+**      Estilos para el Subcomponente de Horario Semanal 
+**================================================================*/
+
+.store-schedule-container {
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.loading-schedule-text {
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  padding: 10px;
+}
+
+.schedule-days-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.schedule-day-row {
+  display: flex;
+  flex-direction: column; /* Apila controles en móvil para evitar desbordamiento */
+  align-items: stretch;
+  background-color: #1a2225;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #34444c;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.schedule-day-row.day-closed {
+  opacity: 0.65;
+}
+
+.day-info-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuye el switch y el día a lo ancho */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.day-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+/* Contenedor de Horarios (Abre / Cierra) */
+.day-time-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.time-field {
+  display: flex;
+  flex-direction: column; /* TRUCO CLAVE: Etiqueta arriba e input abajo para ahorrar ancho */
+  gap: 4px;
+  flex: 1; /* Reparte 50% de ancho a cada campo */
+  min-width: 0; /* TRUCO CLAVE FLEXBOX: Permite que el input se encoja sin romper la tarjeta */
+}
+
+.time-field small {
+  color: #8a99a0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.time-field input[type="time"] {
+  background-color: #242f34;
+  border: 1px solid #34444c;
+  color: #ffffff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: inherit;
+  width: 100%; /* Se ajusta al 100% del espacio asignado */
+  box-sizing: border-box;
+}
+
+
+
+.time-separator {
+  display: none; /* Oculto en móvil ya que cada campo lleva su etiqueta arriba */
+}
+
+.closed-badge-text {
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding: 2px 0;
+}
+
+/* Ajuste para pantallas medianas y grandes (Tablets / Computadores) */
+@media (min-width: 520px) {
+  .schedule-day-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .day-info-toggle {
+    width: auto;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .day-time-inputs {
+    width: auto;
+  }
+
+  .time-field {
+    flex-direction: row;
+    align-items: center;
+    flex: initial;
+  }
+
+  .time-field input[type="time"] {
+    width: auto;
+  }
+
+  .time-separator {
+    display: inline;
+    color: #8a99a0;
+  }
+}
+
 /**================================================================*/
 /**                       Adaptabilidad Móvil */
 /**================================================================*/
