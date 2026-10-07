@@ -3,13 +3,12 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import './storeStatusControl.css';
-import StoreScheduleControl from './StoreScheduleControl'; // Importamos el subcomponente de Horario Semanal
+import StoreScheduleControl from './StoreScheduleControl'; // Importamos el subcomponente
 
 const StoreStatusControl = () => {
   const { menuData } = useMenu();
   const [saving, setSaving] = useState(false);
   const [feedbackMsg, setFeedbackMsg] = useState({ type: '', text: '' });
-  // En el objeto de estado inicial dentro de StoreStatusControl.jsx:
   const [whatsappNumber, setWhatsappNumber] = useState('573228737508');
 
   // Estados locales para el formulario
@@ -20,46 +19,47 @@ const StoreStatusControl = () => {
     closedCartNotice: '',
     scheduledOrderHeader: ''
   });
-  // 1. Mensajes por defecto para evitar que los campos queden vacíos
-const DEFAULT_MESSAGES = {
-  openBanner: '🟢 ¡Estamos Abiertos! Toma tu pedido ahora',
-  closedBanner: '🔴 Tienda Cerrada • Abrimos a las 4:00 PM',
-  closedCartNotice: 'En este momento la cocina está cerrada. Tu pedido se registrará como PROGRAMADO para ser despachado cuando abramos.',
-  scheduledOrderHeader: '📌 *PEDIDO PROGRAMADO* (Para entregar en el próximo horario de atención)',
-  whatsappHeader: '📋 *¡Hola! Quiero hacer el siguiente pedido:*',
-  whatsappFooter: '¡Quedo atento para coordinar el pago y el envío!',
-  deliveryNotice: '¡Domicilios cercanos son gratis!',
-  whatsappInfoNotice: 'Haciendo clic en el botón de abajo, podrás enviar tu pedido por WhatsApp, allí te enviamos información para coordinar el pago y el envío.',
-  checkoutBtnOpen: 'HAZ TU PEDIDO',
-  checkoutBtnClosed: '📌 PROGRAMAR PEDIDO POR WHATSAPP',
-  outOfStockNotice: '⚠️ Producto agotado por el momento. No se incluirá en la orden.',
-  notePlaceholder: 'Sugerencia (ej: sin cebolla, salsa aparte...)'
-};
 
-  // Cargar datos actuales desde MenuContext cuando estén disponibles
-      useEffect(() => {
-      if (menuData?.storeStatus) {
-        const storeMsgs = menuData.storeStatus.messages || {};
+  // Mensajes por defecto
+  const DEFAULT_MESSAGES = {
+    openBanner: '🟢 ¡Estamos Abiertos! Toma tu pedido ahora',
+    closedBanner: '🔴 Tienda Cerrada • Abrimos a las 4:00 PM',
+    closedCartNotice: 'En este momento la cocina está cerrada. Tu pedido se registrará como PROGRAMADO para ser despachado cuando abramos.',
+    scheduledOrderHeader: '📌 *PEDIDO PROGRAMADO* (Para entregar en el próximo horario de atención)',
+    whatsappHeader: '📋 *¡Hola! Quiero hacer el siguiente pedido:*',
+    whatsappFooter: '¡Quedo atento para coordinar el pago y el envío!',
+    deliveryNotice: '¡Domicilios cercanos son gratis!',
+    whatsappInfoNotice: 'Haciendo clic en el botón de abajo, podrás enviar tu pedido por WhatsApp, allí te enviamos información para coordinar el pago y el envío.',
+    checkoutBtnOpen: 'HAZ TU PEDIDO',
+    checkoutBtnClosed: '📌 PROGRAMAR PEDIDO POR WHATSAPP',
+    outOfStockNotice: '⚠️ Producto agotado por el momento. No se incluirá en la orden.',
+    notePlaceholder: 'Sugerencia (ej: sin cebolla, salsa aparte...)'
+  };
 
-        setManualOverride(menuData.storeStatus.manualOverride || 'none');
-        setWhatsappNumber(menuData.storeStatus.whatsappNumber || '573228737508');
+  // Cargar datos actuales
+  useEffect(() => {
+    if (menuData?.storeStatus) {
+      const storeMsgs = menuData.storeStatus.messages || {};
 
-        setMessages({
-          openBanner: storeMsgs.openBanner || DEFAULT_MESSAGES.openBanner,
-          closedBanner: storeMsgs.closedBanner || DEFAULT_MESSAGES.closedBanner,
-          closedCartNotice: storeMsgs.closedCartNotice || DEFAULT_MESSAGES.closedCartNotice,
-          scheduledOrderHeader: storeMsgs.scheduledOrderHeader || DEFAULT_MESSAGES.scheduledOrderHeader,
-          whatsappHeader: storeMsgs.whatsappHeader || DEFAULT_MESSAGES.whatsappHeader,
-          whatsappFooter: storeMsgs.whatsappFooter || DEFAULT_MESSAGES.whatsappFooter,
-          deliveryNotice: storeMsgs.deliveryNotice || DEFAULT_MESSAGES.deliveryNotice,
-          whatsappInfoNotice: storeMsgs.whatsappInfoNotice || DEFAULT_MESSAGES.whatsappInfoNotice,
-          checkoutBtnOpen: storeMsgs.checkoutBtnOpen || DEFAULT_MESSAGES.checkoutBtnOpen,
-          checkoutBtnClosed: storeMsgs.checkoutBtnClosed || DEFAULT_MESSAGES.checkoutBtnClosed,
-          outOfStockNotice: storeMsgs.outOfStockNotice || DEFAULT_MESSAGES.outOfStockNotice,
-          notePlaceholder: storeMsgs.notePlaceholder || DEFAULT_MESSAGES.notePlaceholder
-        });
-      }
-    }, [menuData]);
+      setManualOverride(menuData.storeStatus.manualOverride || 'none');
+      setWhatsappNumber(menuData.storeStatus.whatsappNumber || '573228737508');
+
+      setMessages({
+        openBanner: storeMsgs.openBanner || DEFAULT_MESSAGES.openBanner,
+        closedBanner: storeMsgs.closedBanner || DEFAULT_MESSAGES.closedBanner,
+        closedCartNotice: storeMsgs.closedCartNotice || DEFAULT_MESSAGES.closedCartNotice,
+        scheduledOrderHeader: storeMsgs.scheduledOrderHeader || DEFAULT_MESSAGES.scheduledOrderHeader,
+        whatsappHeader: storeMsgs.whatsappHeader || DEFAULT_MESSAGES.whatsappHeader,
+        whatsappFooter: storeMsgs.whatsappFooter || DEFAULT_MESSAGES.whatsappFooter,
+        deliveryNotice: storeMsgs.deliveryNotice || DEFAULT_MESSAGES.deliveryNotice,
+        whatsappInfoNotice: storeMsgs.whatsappInfoNotice || DEFAULT_MESSAGES.whatsappInfoNotice,
+        checkoutBtnOpen: storeMsgs.checkoutBtnOpen || DEFAULT_MESSAGES.checkoutBtnOpen,
+        checkoutBtnClosed: storeMsgs.checkoutBtnClosed || DEFAULT_MESSAGES.checkoutBtnClosed,
+        outOfStockNotice: storeMsgs.outOfStockNotice || DEFAULT_MESSAGES.outOfStockNotice,
+        notePlaceholder: storeMsgs.notePlaceholder || DEFAULT_MESSAGES.notePlaceholder
+      });
+    }
+  }, [menuData]);
 
   // Guardar cambios en Firestore
   const handleSaveStatus = async (e) => {
@@ -68,10 +68,7 @@ const DEFAULT_MESSAGES = {
     setFeedbackMsg({ type: '', text: '' });
 
     try {
-      // Documento 'spanish' en la colección 'menu'
       const docRef = doc(db, 'menu', 'spanish');
-
-      // Dentro de handleSaveStatus (al guardar en Firestore):
       await updateDoc(docRef, {
         'storeStatus.whatsappNumber': whatsappNumber,
         'storeStatus.manualOverride': manualOverride,
@@ -110,16 +107,25 @@ const DEFAULT_MESSAGES = {
         <p>Ajusta la disponibilidad y los mensajes de aviso para tus clientes.</p>
       </div>
 
+      {/* 🎯 1. BADGE DE ESTADO ACTUAL EN VIVO */}
+      <div className={`current-status-badge ${manualOverride}`}>
+        {manualOverride === 'force_open' && '🟢 ESTADO ACTUAL: FORZADO ABIERTO'}
+        {manualOverride === 'force_closed' && '🔴 ESTADO ACTUAL: CERRADO (Emergencia)'}
+        {manualOverride === 'none' && '⏳ ESTADO ACTUAL: AUTOMÁTICO (Según horario)'}
+      </div>
+
       {feedbackMsg.text && (
         <div className={`status-alert-banner ${feedbackMsg.type}`}>
           {feedbackMsg.text}
         </div>
       )}
 
+      {/* 🎯 2. FORMULARIO PRINCIPAL: Override y Mensajes */}
       <form onSubmit={handleSaveStatus} className="store-control-form">
-        {/* SECCIÓN 1: MODO DE OPERACIÓN */}
+        
+        {/* MODO DE OPERACIÓN (Expuesto por prioridad) */}
         <div className="control-section">
-          <label className="section-title">Modo de Operación</label>
+          <label className="section-title">Modo de Operación Inmediato</label>
           <div className="override-options-grid">
             <button
               type="button"
@@ -128,7 +134,7 @@ const DEFAULT_MESSAGES = {
             >
               <span className="btn-icon">⏰</span>
               <div className="btn-text">
-                <strong>AUTOMÁTICO</strong>
+                <strong>AUTOMÁTICO {manualOverride === 'none' && '✅'}</strong>
                 <small>Según horario semanal</small>
               </div>
             </button>
@@ -140,7 +146,7 @@ const DEFAULT_MESSAGES = {
             >
               <span className="btn-icon">🟢</span>
               <div className="btn-text">
-                <strong>FORZAR ABIERTO</strong>
+                <strong>FORZAR ABIERTO {manualOverride === 'force_open' && '✅'}</strong>
                 <small>Abrir fuera de horario</small>
               </div>
             </button>
@@ -152,27 +158,24 @@ const DEFAULT_MESSAGES = {
             >
               <span className="btn-icon">🔴</span>
               <div className="btn-text">
-                <strong>FORZAR CERRADO</strong>
+                <strong>FORZAR CERRADO {manualOverride === 'force_closed' && '✅'}</strong>
                 <small>Cierre de emergencia</small>
               </div>
             </button>
           </div>
         </div>
 
-        {/* 📅 SUBCOMPONENTE: Configuración de Horario Semanal */}
-        <StoreScheduleControl />
-        
-        {/* SECCIÓN 2: MENSAJES Y CONTACTO EDITABLES (DESPLEGABLE) */}
+        {/* MENSAJES DE LA APLICACIÓN Y CONTACTO (Plegado por ser secundario) */}
         <div className="control-section">
           <details className="admin-collapsible-section">
             <summary className="section-title collapsible-title">
-              💬 Mensajes de la Aplicación y Contacto <span>(Toca para abrir/cerrar)</span>
+              💬 Mensajes de la App y Contacto <span>(Toca para abrir)</span>
             </summary>
 
             <div className="collapsible-content">
               {/* Teléfono de WhatsApp */}
               <div className="form-group-admin">
-                <label htmlFor="whatsappNumber">📱 Número de WhatsApp (Receptor de pedidos):</label>
+                <label htmlFor="whatsappNumber">📱 Número de WhatsApp:</label>
                 <input
                   id="whatsappNumber"
                   type="text"
@@ -192,7 +195,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.openBanner || ''}
                   onChange={(e) => setMessages({ ...messages, openBanner: e.target.value })}
-                  placeholder="Ej: 🟢 ¡Estamos Abiertos! Toma tu pedido ahora"
                 />
               </div>
 
@@ -203,7 +205,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.closedBanner || ''}
                   onChange={(e) => setMessages({ ...messages, closedBanner: e.target.value })}
-                  placeholder="Ej: 🔴 Tienda Cerrada • Abrimos a las 4:00 PM"
                 />
               </div>
 
@@ -214,7 +215,6 @@ const DEFAULT_MESSAGES = {
                   rows="2"
                   value={messages.closedCartNotice || ''}
                   onChange={(e) => setMessages({ ...messages, closedCartNotice: e.target.value })}
-                  placeholder="Aviso explicativo para el cliente en el carrito..."
                 />
               </div>
 
@@ -228,7 +228,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.deliveryNotice || ''}
                   onChange={(e) => setMessages({ ...messages, deliveryNotice: e.target.value })}
-                  placeholder="Ej: ¡Domicilios cercanos son gratis!"
                 />
               </div>
 
@@ -239,7 +238,6 @@ const DEFAULT_MESSAGES = {
                   rows="2"
                   value={messages.whatsappInfoNotice || ''}
                   onChange={(e) => setMessages({ ...messages, whatsappInfoNotice: e.target.value })}
-                  placeholder="Texto instructivo sobre pago y envío..."
                 />
               </div>
 
@@ -250,7 +248,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.checkoutBtnOpen || ''}
                   onChange={(e) => setMessages({ ...messages, checkoutBtnOpen: e.target.value })}
-                  placeholder="Ej: HAZ TU PEDIDO"
                 />
               </div>
 
@@ -261,7 +258,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.checkoutBtnClosed || ''}
                   onChange={(e) => setMessages({ ...messages, checkoutBtnClosed: e.target.value })}
-                  placeholder="Ej: 📌 PROGRAMAR PEDIDO POR WHATSAPP"
                 />
               </div>
 
@@ -272,7 +268,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.outOfStockNotice || ''}
                   onChange={(e) => setMessages({ ...messages, outOfStockNotice: e.target.value })}
-                  placeholder="Ej: ⚠️ Producto agotado por el momento."
                 />
               </div>
 
@@ -283,7 +278,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.notePlaceholder || ''}
                   onChange={(e) => setMessages({ ...messages, notePlaceholder: e.target.value })}
-                  placeholder="Ej: Sugerencia (ej: sin cebolla, salsa aparte...)"
                 />
               </div>
 
@@ -291,13 +285,12 @@ const DEFAULT_MESSAGES = {
 
               {/* Formato de Mensaje de WhatsApp */}
               <div className="form-group-admin">
-                <label htmlFor="scheduledOrderHeader">Encabezado para Pedido Programado (WhatsApp):</label>
+                <label htmlFor="scheduledOrderHeader">Encabezado para Pedido Programado:</label>
                 <input
                   id="scheduledOrderHeader"
                   type="text"
                   value={messages.scheduledOrderHeader || ''}
                   onChange={(e) => setMessages({ ...messages, scheduledOrderHeader: e.target.value })}
-                  placeholder="Ej: 📌 *PEDIDO PROGRAMADO*"
                 />
               </div>
 
@@ -308,7 +301,6 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.whatsappHeader || ''}
                   onChange={(e) => setMessages({ ...messages, whatsappHeader: e.target.value })}
-                  placeholder="Ej: 📋 *¡Hola! Quiero hacer el siguiente pedido:*"
                 />
               </div>
 
@@ -319,18 +311,31 @@ const DEFAULT_MESSAGES = {
                   type="text"
                   value={messages.whatsappFooter || ''}
                   onChange={(e) => setMessages({ ...messages, whatsappFooter: e.target.value })}
-                  placeholder="Ej: ¡Quedo atento para coordinar el pago y el envío!"
                 />
               </div>
             </div>
           </details>
         </div>
 
-        {/* BOTÓN DE GUARDAR */}
-        <button type="submit" className="btn-save-store-status" disabled={saving}>
-          {saving ? 'Guardando en Firestore...' : '💾 GUARDAR CAMBIOS'}
+        {/* 🎯 3. FEEDBACK EN BOTÓN DE GUARDAR */}
+        <button 
+          type="submit" 
+          className={`btn-save-store-status ${manualOverride === 'force_closed' ? 'alert-danger' : ''}`} 
+          disabled={saving}
+        >
+          {saving 
+            ? '⏳ Guardando...' 
+            : manualOverride === 'force_closed' 
+              ? '⚠️ CONFIRMAR CIERRE DE TIENDA' 
+              : '💾 GUARDAR MODO Y MENSAJES'}
         </button>
       </form>
+
+      <hr className="admin-divider" style={{ margin: '24px 0', borderColor: 'rgba(255,255,255,0.1)' }} />
+
+      {/* 📅 4. SUBCOMPONENTE: Horario Semanal (Totalmente Independiente) */}
+      <StoreScheduleControl />
+
     </div>
   );
 };

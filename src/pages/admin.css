@@ -101,18 +101,21 @@
 /**========================================================================*/
 /**   --- Menú de Pestañas Navegación (Mobile First & Responsivo) --- */
 /**========================================================================*/
+/* --- Menú de Pestañas de Navegación (Móvil y Escritorio) --- */
 .admin-tab-nav {
   display: flex;
+  align-items: center;
   background-color: #1a2225;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 12px;
-  gap: 6px;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  /* Ocultar barra de scroll nativa para acabado limpio de App */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  gap: 8px;
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  white-space: nowrap; /* Evita que los botones salten a otra línea */
+  -webkit-overflow-scrolling: touch; /* Desplazamiento fluido en pantallas táctiles iOS/Android */
+  
+  /* Oculta la barra de scroll nativa para dar aspecto de App móvil */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
 }
 
 .admin-tab-nav::-webkit-scrollbar {
@@ -124,13 +127,14 @@
   border-radius: 4px;
 }
 
+/* Botón de cada Pestaña */
 .tab-btn {
-  flex: 1 0 auto;
+  flex: 0 0 auto; /* TRUCO CLAVE: Evita que el botón se aplaste o se corte */
   background: transparent;
   border: none;
   color: #a0a0a0;
   padding: 12px 10px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   border-bottom: 3px solid transparent;
@@ -138,10 +142,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
   box-sizing: border-box;
 }
-
+/* Margen de aire al final del último ítem para que no quede pegado al borde */
+.tab-btn:last-child {
+  padding-right: 16px;
+  margin-right: 8px;
+}
 .tab-btn:hover {
   color: #ffffff;
 }
@@ -216,16 +224,15 @@
     padding: 18px 16px;
   }
 }
-/* Ajuste específico para celulares (< 480px) */
+/* --- Ajuste específico para pantallas móviles angostas (< 480px) --- */
 @media (max-width: 480px) {
   .admin-tab-nav {
-    padding: 0 6px;
-    gap: 2px;
+    padding: 0 8px;
+    gap: 4px;
   }
 
   .tab-btn {
-    padding: 12px 6px;
-    font-size: 0.78rem; /* Garantiza que los 3 módulos quepan completos sin cortarse */
-    gap: 4px;
+    padding: 12px 8px;
+    font-size: 0.78rem; /* Ajuste sutil de fuente para ganar espacio */
   }
 }

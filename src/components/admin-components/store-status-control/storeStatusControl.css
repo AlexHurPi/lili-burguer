@@ -1,10 +1,15 @@
+/**========================================================================
+**                 CONTENEDOR PRINCIPAL Y CABECERA
+**========================================================================*/
+
 /* Contenedor Tarjeta Módulo 2 */
 .store-control-card {
-  /*background-color: #1a2225;
+  /* Se comentaron estas líneas porque estaban afectando la apariencia de la tarjeta padre */
+  /* background-color: #1a2225;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;*/
-  /*padding: 24px;*/
-  /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);*/
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); */
   color: #ffffff;
 }
 
@@ -26,7 +31,59 @@
   font-size: 0.88rem;
 }
 
-/* Banners de Alerta Feedback */
+.store-control-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/**========================================================================
+**                 ALERTAS Y BADGES DE ESTADO
+**========================================================================*/
+
+/* Badge superior de visibilidad inmediata */
+.current-status-badge {
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.current-status-badge.none {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid #3b82f6;
+}
+
+.current-status-badge.force_open {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #51f08b;
+  border: 1px solid #28a745;
+}
+
+.current-status-badge.force_closed {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #ff6b6b;
+  border: 1px solid #e74c3c;
+  animation: pulse-border 2s infinite;
+}
+
+/* Banners de Alerta Feedback (Toast) */
 .status-alert-banner {
   padding: 12px 16px;
   border-radius: 8px;
@@ -48,27 +105,15 @@
   color: #ff6b6b;
 }
 
-/* Secciones del Formulario */
-.store-control-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
 
-.section-title {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+/**========================================================================
+**                 MODO DE OPERACIÓN INMEDIATO (BOTONES)
+**========================================================================*/
 
-/* Grilla de Botones de Sobreescritura */
+/* Grilla de Botones de Sobreescritura (2 Columnas) */
 .override-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
@@ -84,6 +129,12 @@
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
+}
+
+/* TRUCO UX: El botón de "Cierre" abarca las 2 columnas en la parte inferior */
+.override-btn.force-closed {
+  grid-column: 1 / -1; 
+  justify-content: center;
 }
 
 .override-btn .btn-icon {
@@ -121,6 +172,11 @@
   background-color: rgba(255, 78, 62, 0.15);
 }
 
+
+/**========================================================================
+**                 FORMULARIOS Y SECCIÓN PLEGABLE (MENSAJES)
+**========================================================================*/
+
 /* Inputs de Mensajes */
 .form-group-admin {
   display: flex;
@@ -153,32 +209,7 @@
   border-color: #ff4e3e;
 }
 
-/* Botón Guardar */
-.btn-save-store-status {
-  background-color: #ff4e3e;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 8px;
-}
-
-.btn-save-store-status:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-save-store-status:hover:not(:disabled) {
-  background-color: #e03e2e;
-}
-
-/**================================================================*/
-/**             Estilos para Sección Desplegable */
-/**================================================================*/
+/* Estilos para Sección Desplegable (Acordeón) */
 .admin-collapsible-section {
   background-color: #242f34;
   border: 1px solid #34444c;
@@ -217,10 +248,49 @@
   margin: 8px 0;
 }
 
+/* Botón Guardar Cambios */
+.btn-save-store-status {
+  background-color: #ff4e3e;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 8px;
+}
 
-/**================================================================
-**      Estilos para el Subcomponente de Horario Semanal 
-**================================================================*/
+.btn-save-store-status:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-save-store-status:hover:not(:disabled) {
+  background-color: #e03e2e;
+}
+
+/* Botón de Guardar en estado de Alerta/Cierre */
+.btn-save-store-status.alert-danger {
+  background-color: #dc3545;
+  box-shadow: 0 0 12px rgba(220, 53, 69, 0.3);
+}
+
+.btn-save-store-status.alert-danger:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+
+/**========================================================================
+**                 HORARIO SEMANAL (SUBCOMPONENTE)
+**========================================================================*/
 
 .store-schedule-container {
   margin-top: 20px;
@@ -244,7 +314,7 @@
 
 .schedule-day-row {
   display: flex;
-  flex-direction: column; /* Apila controles en móvil para evitar desbordamiento */
+  flex-direction: column; 
   align-items: stretch;
   background-color: #1a2225;
   padding: 12px 14px;
@@ -262,7 +332,7 @@
 .day-info-toggle {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribuye el switch y el día a lo ancho */
+  justify-content: space-between; 
   width: 100%;
   box-sizing: border-box;
 }
@@ -284,10 +354,10 @@
 
 .time-field {
   display: flex;
-  flex-direction: column; /* TRUCO CLAVE: Etiqueta arriba e input abajo para ahorrar ancho */
+  flex-direction: column; 
   gap: 4px;
-  flex: 1; /* Reparte 50% de ancho a cada campo */
-  min-width: 0; /* TRUCO CLAVE FLEXBOX: Permite que el input se encoja sin romper la tarjeta */
+  flex: 1; 
+  min-width: 0; 
 }
 
 .time-field small {
@@ -305,11 +375,9 @@
   font-size: 0.85rem;
   outline: none;
   font-family: inherit;
-  width: 100%; /* Se ajusta al 100% del espacio asignado */
+  width: 100%; 
   box-sizing: border-box;
 }
-
-
 
 .time-separator {
   display: none; /* Oculto en móvil ya que cada campo lleva su etiqueta arriba */
@@ -323,7 +391,7 @@
   padding: 2px 0;
 }
 
-/* Ajuste para pantallas medianas y grandes (Tablets / Computadores) */
+/* Ajuste de horario para pantallas medianas y grandes (Tablets / Computadores) */
 @media (min-width: 520px) {
   .schedule-day-row {
     flex-direction: row;
@@ -357,16 +425,34 @@
   }
 }
 
-/**================================================================*/
-/**                       Adaptabilidad Móvil */
-/**================================================================*/
+
+/**========================================================================
+**                 ADAPTABILIDAD MÓVIL (RESPONSIVE GLOBALES)
+**========================================================================*/
 
 @media (max-width: 600px) {
   .store-control-card {
     padding: 16px;
   }
 
-  .override-options-grid {
+  /* Si se requiere, se fuerza a 1 columna. Sin embargo, como el truco actual a 2 columnas se ve bien, puedes quitar esta regla si prefieres mantener las 2 columnas en móviles. */
+  /*.override-options-grid {
     grid-template-columns: 1fr;
+  }*/
+}
+
+/* Ajuste preventivo para que los botones de operación no se aprieten en celulares muy pequeños */
+@media (max-width: 400px) {
+  .override-btn {
+    padding: 12px 8px;
+    gap: 8px;
+  }
+  
+  .override-btn .btn-icon {
+    font-size: 1.2rem;
+  }
+
+  .override-btn .btn-text strong {
+    font-size: 0.78rem;
   }
 }

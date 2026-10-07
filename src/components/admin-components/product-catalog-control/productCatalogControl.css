@@ -1,0 +1,214 @@
+.product-catalog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.catalog-card-section {
+  background-color: #1a2225;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.catalog-header h2 {
+  color: #ffffff;
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+
+.catalog-header p {
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.catalog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.form-control {
+  background-color: #111618;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.textarea-control {
+  resize: vertical;
+}
+
+.category-selector-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-toggle-category {
+  background-color: transparent;
+  border: 1px dashed #ff4e3e;
+  color: #ff4e3e;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.form-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.image-notice-text {
+  color: #ffb74d;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.image-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  background-color: #263238;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.upload-separator {
+  color: #808080;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.image-preview-container {
+  margin-top: 8px;
+  background: #111618;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.image-preview-container p {
+  color: #a0a0a0;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.preview-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-save-catalog {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-save-catalog:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Acordeón y Lista de Borrado */
+.delete-category-accordion {
+  background: #111618;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.accordion-summary {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.category-products-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.delete-product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #1a2225;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.delete-card-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.delete-card-info {
+  flex: 1;
+}
+
+.delete-card-info h4 {
+  color: #ffffff;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.delete-card-price {
+  color: #28a745;
+  font-size: 0.8rem;
+  margin: 2px 0 0 0;
+}
+
+.btn-delete-product {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
