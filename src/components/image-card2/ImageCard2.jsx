@@ -5,7 +5,12 @@ import { useCart } from '../../context/CartContext.jsx';
 
 // Helper para verificar si la promoción está activa en fecha y hora actual
 const checkIsPromoActive = (product) => {
-  if (!product?.offerPrice || product.offerPrice.trim() === '' || !Array.isArray(product?.days) || product.days.length === 0) {
+  if (
+    !product?.offerPrice ||
+    product.offerPrice.trim() === '' ||
+    !Array.isArray(product?.days) ||
+    product.days.length === 0
+  ) {
     return false;
   }
 
@@ -38,10 +43,11 @@ const ProductItem = ({ product }) => {
   // 3. Promoción activa (solo si hay stock)
   const isPromo = isStock && checkIsPromoActive(product);
 
-  // 4. Precio vigente (si hay oferta activa toma offerPrice, de lo contrario regularPrice)
-  const precioActual = isPromo && product.offerPrice && product.offerPrice.trim() !== ''
-    ? product.offerPrice
-    : product.regularPrice;
+  // 4. Precio vigente
+  const precioActual =
+    isPromo && product.offerPrice && product.offerPrice.trim() !== ''
+      ? product.offerPrice
+      : product.regularPrice;
 
   const handleIncrement = () => {
     if (isStock) setCantidad(cantidad + 1);
@@ -104,11 +110,11 @@ const ProductItem = ({ product }) => {
       <div className="price-quantity-row">
         <div className="price-container">
           <span className="product-price">
-            {precioActual?.includes('$') ? precioActual : `$${precioActual}`}
+            {precioActual?.includes('$') ? precioActual : `$ ${precioActual}`}
           </span>
           {isPromo && product.regularPrice && (
             <span className="product-old-price">
-              {product.regularPrice.includes('$') ? product.regularPrice : `$${product.regularPrice}`}
+              {product.regularPrice.includes('$') ? product.regularPrice : `$ ${product.regularPrice}`}
             </span>
           )}
         </div>
@@ -146,22 +152,33 @@ const ProductItem = ({ product }) => {
 };
 
 // COMPONENTE PRINCIPAL
-// COMPONENTE PRINCIPAL
 const ImageCard2 = ({ dataKey }) => {
   const { menuData } = useMenu();
 
-  // Se extrae la categoría (ej: "card1" desde "cards.card1")
+  // Extraemos la categoría (ej: "card1" desde "cards.card1")
   const [_, categoryKey] = dataKey.split('.');
-  const products = menuData?.cards?.[categoryKey] || [];
+  const rawProducts = menuData?.cards?.[categoryKey] || [];
 
-  // 1. NUEVO FILTRO: Extraemos solo los productos que SÍ están disponibles
-  const visibleProducts = products.filter(product => product.available !== false);
+  // 1. Filtramos los disponibles
+  const visibleProducts = rawProducts.filter((product) => product.available !== false);
 
-  // 2. VALIDACIÓN: Si la categoría no tiene productos visibles, no renderizamos NADA
   if (visibleProducts.length === 0) return null;
 
-  // 3. Tomamos el título del primer producto VISIBLE
-  const categoryTitle = visibleProducts[0]?.categoryTitle || products[0]?.categoryTitle;
+  // 2. ORDENAMIENTO DINÁMICO: Por 'order' y desempate alfabético por 'productTitle'
+  const sortedProducts = [...visibleProducts].sort((a, b) => {
+    const orderA = a.order !== undefined && a.order !== null ? Number(a.order) : 9999;
+    const orderB = b.order !== undefined && b.order !== null ? Number(b.order) : 9999;
+
+    if (orderA !== orderB) {
+      return orderA - orderB;
+    }
+
+    const titleA = (a.productTitle || '').toLowerCase();
+    const titleB = (b.productTitle || '').toLowerCase();
+    return titleA.localeCompare(titleB);
+  });
+
+  const categoryTitle = sortedProducts[0]?.categoryTitle || rawProducts[0]?.categoryTitle;
 
   return (
     <div className="imageCard2-mainContainer">
@@ -171,8 +188,7 @@ const ImageCard2 = ({ dataKey }) => {
         </div>
       )}
       <div className="products-container">
-        {/* 4. Mapeamos sobre los productos FILTRADOS, no sobre el total */}
-        {visibleProducts.map((product) => (
+        {sortedProducts.map((product) => (
           <ProductItem key={product.id || product.productTitle} product={product} />
         ))}
       </div>

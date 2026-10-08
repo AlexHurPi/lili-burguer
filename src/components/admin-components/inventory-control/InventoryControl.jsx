@@ -4,11 +4,11 @@ editar y eliminar productos de la base de datos.*/
 import React from 'react';
 import { useInventoryLogic } from './useInventoryLogic';
 import { ProductEditModal } from './ProductEditModal';
-import { useMenu } from '../../../context/MenuContext'; // 👈 1. Importamos useMenu para leer categoryOrder
+import { useMenu } from '../../../context/MenuContext'; // 👈 Leemos menuData para la secuencia global
 import './inventoryControl.css';
 
 const InventoryControl = () => {
-  const { menuData } = useMenu(); // 👈 2. Leemos menuData directamente
+  const { menuData } = useMenu();
   const {
     cardsState,
     openCategory,
@@ -22,7 +22,7 @@ const InventoryControl = () => {
     handleSaveCategory
   } = useInventoryLogic();
 
-  // 3. Extraemos y ordenamos las llaves de las categorías según la secuencia global
+  // Extraemos y ordenamos las llaves de las categorías según la secuencia global
   const sortedCategoryKeys = Object.keys(cardsState || {}).sort((a, b) => {
     const orderList = menuData?.categoryOrder || [];
     const indexA = orderList.indexOf(a);
@@ -32,7 +32,7 @@ const InventoryControl = () => {
     if (indexA !== -1) return -1;
     if (indexB !== -1) return 1;
 
-    // Fallback numérico en caso de que alguna clave no esté registrada en la lista
+    // Fallback numérico en caso de que alguna clave no esté registrada
     const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
     const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
     return numA - numB;
@@ -62,12 +62,25 @@ const InventoryControl = () => {
       </div>
 
       <div className="categories-accordion-wrapper">
-        {/* 4. Iteramos sobre sortedCategoryKeys en lugar de Object.entries(cardsState) */}
         {sortedCategoryKeys.map((catKey) => {
-          const products = cardsState[catKey] || [];
-          const catTitle = products[0]?.categoryTitle || catKey.toUpperCase();
+          const rawProducts = cardsState[catKey] || [];
+          const catTitle = rawProducts[0]?.categoryTitle || catKey.toUpperCase();
           const isOpen = openCategory === catKey;
           const isSaving = savingCategory === catKey;
+
+          // 🔹 ORDENAMIENTO DINÁMICO DE PRODUCTOS DENTRO DE LA CATEGORÍA
+          const sortedProducts = [...rawProducts].sort((a, b) => {
+            const orderA = a.order !== undefined && a.order !== null ? Number(a.order) : 9999;
+            const orderB = b.order !== undefined && b.order !== null ? Number(b.order) : 9999;
+
+            if (orderA !== orderB) {
+              return orderA - orderB;
+            }
+
+            const titleA = (a.productTitle || '').toLowerCase();
+            const titleB = (b.productTitle || '').toLowerCase();
+            return titleA.localeCompare(titleB);
+          });
 
           return (
             <div className="category-accordion-item" key={catKey}>
@@ -80,7 +93,7 @@ const InventoryControl = () => {
                 <div className="header-title-group">
                   <span className="accordion-icon">{isOpen ? '📂' : '📁'}</span>
                   <h3>{catTitle}</h3>
-                  <span className="product-count">({products.length} ítems)</span>
+                  <span className="product-count">({sortedProducts.length} ítems)</span>
                 </div>
                 <span className="accordion-chevron">{isOpen ? '▲' : '▼'}</span>
               </button>
@@ -96,14 +109,20 @@ const InventoryControl = () => {
                   </div>
 
                   <div className="compact-products-list">
-                    {products.map((product, index) => {
+                    {sortedProducts.map((product) => {
+                      // Obtenemos el índice real del producto dentro del arreglo original de la categoría
+                      // para garantizar que el toggle afecte al producto correcto en el estado local
+                      const originalIndex = rawProducts.findIndex(
+                        (p) => (p.id && p.id === product.id) || p.productTitle === product.productTitle
+                      );
+
                       const isStock = product.stock !== false;
                       const isAvailable = product.available !== false;
 
                       return (
                         <div
                           className={`compact-item-row ${!isStock ? 'row-out-stock' : ''} ${!isAvailable ? 'row-hidden' : ''}`}
-                          key={product.id || index}
+                          key={product.id || product.productTitle}
                         >
                           <div className="compact-left-info">
                             {product.image && (
@@ -123,7 +142,7 @@ const InventoryControl = () => {
                               <input
                                 type="checkbox"
                                 checked={isStock}
-                                onChange={() => handleQuickToggle(catKey, index, 'stock')}
+                                onChange={() => handleQuickToggle(catKey, originalIndex, 'stock')}
                               />
                               <span className="slider-mini"></span>
                             </label>
@@ -132,7 +151,7 @@ const InventoryControl = () => {
                               <input
                                 type="checkbox"
                                 checked={isAvailable}
-                                onChange={() => handleQuickToggle(catKey, index, 'available')}
+                                onChange={() => handleQuickToggle(catKey, originalIndex, 'available')}
                               />
                               <span className="slider-mini"></span>
                             </label>
@@ -140,7 +159,7 @@ const InventoryControl = () => {
                             <button
                               type="button"
                               className="btn-edit-item"
-                              onClick={() => setEditingItem({ catKey, index, product })}
+                              onClick={() => setEditingItem({ catKey, index: originalIndex, product })}
                               title="Editar detalles completos"
                             >
                               ✏️

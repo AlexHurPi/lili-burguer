@@ -324,8 +324,9 @@
   justify-content: center;
   gap: 8px;
 }
-
-/* Ventana Modal Emergente */
+/**=========================================================================
+/**                     Ventana Modal Emergente                           */
+/**=========================================================================*/
 .admin-modal-overlay {
   position: fixed;
   top: 0;
@@ -512,4 +513,34 @@
   .form-row-two {
     grid-template-columns: 1fr;
   }
+}
+/**==========================================================================*/
+/**                           ESTADOS DE PROMOCIONES */
+/**==========================================================================*/
+.promo-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border-top: 1px solid #2f3e46;
+  padding-top: 12px;
+}
+
+.promo-block-wrapper {
+  transition: all 0.3s ease;
+}
+
+.promo-block-wrapper.promo-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.promo-247-note {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.35;
 }
