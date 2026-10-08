@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import { listR2Images, uploadImageToR2 } from '../../../services/r2Service';
@@ -128,6 +128,15 @@ export const useProductCatalogLogic = () => {
     if (formData.isNewCategory && !formData.newCategoryTitle.trim()) {
       showToast('error', 'Escribe el nombre de la nueva categoría.');
       return;
+    }
+    // Dentro de la función que guarda el producto con una categoría NUEVA:
+    if (formData.isNewCategory) {
+      const newCategoryKey = getNextCategoryKey(); // ej: 'card16'
+
+      await updateDoc(doc(db, "menu", "spanish"), {
+        [`cards.${newCategoryKey}`]: [newProductObj],
+        categoryOrder: arrayUnion(newCategoryKey) // 👈 Agrega la nueva categoría al final de la secuencia
+      });
     }
 
     setIsSaving(true);

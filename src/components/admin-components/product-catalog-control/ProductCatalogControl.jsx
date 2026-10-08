@@ -2,6 +2,7 @@ import React from 'react';
 import { useProductCatalogLogic } from './useProductCatalogLogic';
 import { useMenu } from '../../../context/MenuContext';
 import './productCatalogControl.css';
+import CategoryOrderControl from './CategoryOrderControl';
 
 const ProductCatalogControl = () => {
   const { menuData } = useMenu();
@@ -256,6 +257,9 @@ const ProductCatalogControl = () => {
           })}
         </div>
       </details>
+      
+      {/* COMPONENTE DE REORDENACIÓN DE CATEGORÍAS */}    
+      <CategoryOrderControl />      
 
       {/* 🖼️ MODAL DE GALERÍA R2 */}
       {isGalleryOpen && (

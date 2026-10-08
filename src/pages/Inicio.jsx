@@ -20,8 +20,25 @@ import { migrarMenuAFirestore } from '../helpers/migrador';
 const Inicio = () => {
   const { menuData } = useMenu();
 
-  // Extrae las claves y las ordena estrictamente por su valor numérico (card1, card2... card10, card15)
+  /*// Extrae las claves y las ordena estrictamente por su valor numérico (card1, card2... card10, card15)
   const categoryKeys = Object.keys(menuData?.cards || {}).sort((a, b) => {
+    const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+    const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+    return numA - numB;
+  });*/
+
+  // Ordena las categorías según la secuencia definida en categoryOrder de Firestore
+  const categoryKeys = Object.keys(menuData?.cards || {}).sort((a, b) => {
+    const orderList = menuData?.categoryOrder || [];
+    const indexA = orderList.indexOf(a);
+    const indexB = orderList.indexOf(b);
+
+    // Si ambas llaves están en la lista global, respeta su posición
+    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+
+    // Fallback numérico en caso de que la clave no esté registrada en la lista
     const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
     const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
     return numA - numB;
@@ -44,7 +61,10 @@ const Inicio = () => {
       
       <WhatsappButton />
       <Kart />
-      
+      <button onClick={migrarMenuAFirestore} style={{ padding: '12px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', margin: '20px' }}>
+      🚀 Subir spanish.json a Firebase
+      </button>
+
       <Footer dataKey="footer" />
     </div>
   );
