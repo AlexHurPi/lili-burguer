@@ -36,12 +36,15 @@ const ProductCatalogControl = () => {
         </div>
       )}
 
-      {/* ➕ SECCIÓN 1: FORMULARIO DE CREACIÓN DE PRODUCTOS */}
-      <section className="catalog-card-section">
-        <div className="catalog-header">
-          <h2>➕ Agregar Nuevo Producto</h2>
-          <p>Completa los campos para dar de alta un producto en el menú en vivo.</p>
-        </div>
+      {/* ➕ TARJETA 1: FORMULARIO DE CREACIÓN (PLEGABLE / ENCOGIBLE) */}
+      <details className="catalog-card-section admin-collapsible-card">
+        <summary className="catalog-header collapsible-summary">
+          <div className="summary-title-wrapper">
+            <h2>➕ Agregar Nuevo Producto</h2>
+            <p>Completa los campos para dar de alta un producto en el menú en vivo.</p>
+          </div>
+          <span className="summary-icon">▼</span>
+        </summary>
 
         <form onSubmit={handleCreateProduct} className="catalog-form">
           {/* Asignación de Categoría */}
@@ -200,14 +203,17 @@ const ProductCatalogControl = () => {
               : '🚀 Crear y Publicar Producto'}
           </button>
         </form>
-      </section>
+      </details>
 
-      {/* 🗑️ SECCIÓN 2: LISTA DE PRODUCTOS Y ELIMINACIÓN DE REGISTROS */}
-      <section className="catalog-card-section">
-        <div className="catalog-header">
-          <h2>🗑️ Eliminación y Retiro de Productos</h2>
-          <p>Consulta los productos existentes y retíralos de Firestore con confirmación.</p>
-        </div>
+      {/* 🗑️ TARJETA 2: LISTA DE PRODUCTOS Y ELIMINACIÓN (PLEGABLE / ENCOGIBLE) */}
+      <details className="catalog-card-section admin-collapsible-card">
+        <summary className="catalog-header collapsible-summary">
+          <div className="summary-title-wrapper">
+            <h2>🗑️ Eliminación y Retiro de Productos</h2>
+            <p>Consulta los productos existentes y retíralos de Firestore con confirmación.</p>
+          </div>
+          <span className="summary-icon">▼</span>
+        </summary>
 
         <div className="categories-delete-list">
           {Object.keys(menuData?.cards || {}).map((catKey) => {
@@ -249,7 +255,7 @@ const ProductCatalogControl = () => {
             );
           })}
         </div>
-      </section>
+      </details>
 
       {/* 🖼️ MODAL DE GALERÍA R2 */}
       {isGalleryOpen && (

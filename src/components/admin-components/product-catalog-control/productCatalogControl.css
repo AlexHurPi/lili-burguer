@@ -1,5 +1,5 @@
 /**=======================================================================
-**                  1. CONTENEDOR GENERAL Y TARJETAS
+**                  1. CONTENEDOR GENERAL Y TARJETAS PLEGABLES
 **========================================================================== */
 
 /* Contenedor principal del Módulo 5 */
@@ -10,7 +10,7 @@
   padding: 10px 0;
 }
 
-/* Tarjeta estructuradora de secciones */
+/* Tarjeta estructuradora desplegable (<details>) */
 .catalog-card-section {
   background-color: #1a2225;
   border-radius: 12px;
@@ -18,18 +18,59 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-sizing: border-box; /* PREVENCIÓN UX: Asegura que paddings no desborden el ancho en pantalla */
   width: 100%;
+  transition: all 0.3s ease;
 }
 
-.catalog-header h2 {
+/* Cabecera interactiva del acordeón (<summary>) */
+.collapsible-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  list-style: none; /* Remueve el triángulo por defecto del navegador */
+}
+
+.collapsible-summary::-webkit-details-marker {
+  display: none; /* Remueve el marcador nativo en Chrome/Safari */
+}
+
+.summary-title-wrapper {
+  flex: 1;
+  padding-right: 12px;
+}
+
+.summary-title-wrapper h2 {
   color: #ffffff;
   font-size: 1.25rem;
-  margin-bottom: 4px;
+  margin: 0 0 4px 0;
 }
 
-.catalog-header p {
+.summary-title-wrapper p {
   color: #a0a0a0;
   font-size: 0.85rem;
-  margin-bottom: 16px;
+  margin: 0;
+}
+
+/* Indicador de flecha animado */
+.summary-icon {
+  color: #ff4e3e;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Rotación de la flecha al abrir la tarjeta */
+details.admin-collapsible-card[open] .summary-icon {
+  transform: rotate(180deg);
+}
+
+/* Separador dinámico cuando la tarjeta se expande */
+details.admin-collapsible-card[open] .catalog-form,
+details.admin-collapsible-card[open] .categories-delete-list {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 
@@ -285,7 +326,7 @@
 /* Grilla adaptable de miniaturas de la galería */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); /* Relleno dinámico de fotos cuadradas */
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 10px;
   overflow-y: auto;
   max-height: 50vh;
