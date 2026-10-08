@@ -29,9 +29,9 @@ export const useInventoryLogic = () => {
   useEffect(() => {
     if (menuData?.cards) {
       setCardsState(JSON.parse(JSON.stringify(menuData.cards)));
-      if (!openCategory && Object.keys(menuData.cards).length > 0) {
+      /*if (!openCategory && Object.keys(menuData.cards).length > 0) {
         setOpenCategory(Object.keys(menuData.cards)[0]);
-      }
+      }*/
     }
   }, [menuData]);
 

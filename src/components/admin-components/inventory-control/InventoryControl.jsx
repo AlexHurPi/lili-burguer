@@ -4,9 +4,11 @@ editar y eliminar productos de la base de datos.*/
 import React from 'react';
 import { useInventoryLogic } from './useInventoryLogic';
 import { ProductEditModal } from './ProductEditModal';
+import { useMenu } from '../../../context/MenuContext'; // 👈 1. Importamos useMenu para leer categoryOrder
 import './inventoryControl.css';
 
 const InventoryControl = () => {
+  const { menuData } = useMenu(); // 👈 2. Leemos menuData directamente
   const {
     cardsState,
     openCategory,
@@ -20,6 +22,23 @@ const InventoryControl = () => {
     handleSaveCategory
   } = useInventoryLogic();
 
+  // 3. Extraemos y ordenamos las llaves de las categorías según la secuencia global
+  const sortedCategoryKeys = Object.keys(cardsState || {}).sort((a, b) => {
+    const orderList = menuData?.categoryOrder || [];
+    const indexA = orderList.indexOf(a);
+    const indexB = orderList.indexOf(b);
+
+    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+
+    // Fallback numérico en caso de que alguna clave no esté registrada en la lista
+    const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+    const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+    return numA - numB;
+  });
+
+  // Si no hay productos cargados, mostrar un estado de carga
   if (!cardsState || Object.keys(cardsState).length === 0) {
     return (
       <div className="inventory-empty-state">
@@ -43,7 +62,9 @@ const InventoryControl = () => {
       </div>
 
       <div className="categories-accordion-wrapper">
-        {Object.entries(cardsState).map(([catKey, products]) => {
+        {/* 4. Iteramos sobre sortedCategoryKeys en lugar de Object.entries(cardsState) */}
+        {sortedCategoryKeys.map((catKey) => {
+          const products = cardsState[catKey] || [];
           const catTitle = products[0]?.categoryTitle || catKey.toUpperCase();
           const isOpen = openCategory === catKey;
           const isSaving = savingCategory === catKey;
