@@ -1,3 +1,8 @@
+/**=======================================================================
+**                  1. CONTENEDOR GENERAL Y TARJETAS
+**========================================================================== */
+
+/* Contenedor principal del Módulo 5 */
 .product-catalog-container {
   display: flex;
   flex-direction: column;
@@ -5,11 +10,14 @@
   padding: 10px 0;
 }
 
+/* Tarjeta estructuradora de secciones */
 .catalog-card-section {
   background-color: #1a2225;
   border-radius: 12px;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box; /* PREVENCIÓN UX: Asegura que paddings no desborden el ancho en pantalla */
+  width: 100%;
 }
 
 .catalog-header h2 {
@@ -24,16 +32,25 @@
   margin-bottom: 16px;
 }
 
+
+/**=======================================================================
+**                  2. FORMULARIO Y CAMPOS DE ENTRADA (INPUTS)
+**========================================================================== */
+
 .catalog-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
+/* Grupos de Formulario */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0; /* TRUCO CLAVE GRID: Permite que el contenedor se reduzca sin romper el layout en móvil */
+  width: 100%;
 }
 
 .form-label {
@@ -42,19 +59,29 @@
   font-weight: 600;
 }
 
+/* Campos Input y Textarea */
 .form-control {
+  width: 100%;
+  box-sizing: border-box; /* Incluye padding y border dentro del 100% del ancho */
   background-color: #111618;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 10px 12px;
   color: #ffffff;
   font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #ff4e3e; /* Resaltado con color primario al enfocar */
 }
 
 .textarea-control {
   resize: vertical;
 }
 
+/* Selector de Categorías (Existente vs Nueva) */
 .category-selector-group {
   display: flex;
   flex-direction: column;
@@ -69,13 +96,25 @@
   border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
+.btn-toggle-category:hover {
+  background-color: rgba(255, 78, 62, 0.1);
+}
+
+/* Grilla de 2 columnas para Precios e Insignias */
 .form-row-2col {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  width: 100%;
 }
+
+
+/**=======================================================================
+**              3. CARGADOR DE IMAGEN Y SELECCIÓN DE FOTO
+**========================================================================== */
 
 .image-notice-text {
   color: #ffb74d;
@@ -89,6 +128,7 @@
   gap: 8px;
 }
 
+/* Botón personalizado de carga de archivo nativo */
 .custom-file-upload {
   display: inline-block;
   background-color: #263238;
@@ -99,18 +139,36 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.85rem;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #37474f;
 }
 
 .custom-file-upload input[type="file"] {
-  display: none;
+  display: none; /* Oculta el input de sistema para usar la etiqueta estética */
 }
 
-.upload-separator {
-  color: #808080;
-  font-size: 0.75rem;
-  text-align: center;
+/* Botón para abrir la Galería Cloudflare R2 */
+.btn-open-gallery {
+  background-color: #0070f3;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.btn-open-gallery:hover {
+  background-color: #0051a8;
+}
+
+/* Contenedor de Vista Previa de la Fotografía */
 .image-preview-container {
   margin-top: 8px;
   background: #111618;
@@ -127,11 +185,12 @@
 .preview-thumbnail {
   width: 80px;
   height: 80px;
-  object-fit: cover;
+  object-fit: cover; /* Evita la distorsión manteniendo la proporción de la foto */
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Botón Principal de Envío / Guardado */
 .btn-save-catalog {
   background-color: #28a745;
   color: #ffffff;
@@ -142,6 +201,11 @@
   font-size: 0.95rem;
   cursor: pointer;
   margin-top: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-save-catalog:hover:not(:disabled) {
+  background-color: #218838;
 }
 
 .btn-save-catalog:disabled {
@@ -149,7 +213,110 @@
   cursor: not-allowed;
 }
 
-/* Acordeón y Lista de Borrado */
+
+/**=======================================================================
+**              4. MODAL EMERGENTE DE GALERÍA DE MEDIOS (R2)
+**========================================================================== */
+
+/* Fondo oscuro flotante con desenfoque */
+.media-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px); /* Desenfoque sutil del fondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.media-modal-content {
+  background-color: #1a2225;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.media-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.media-modal-header h3 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  color: #ffffff;
+}
+
+.loading-gallery-text {
+  color: #a0a0a0;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Grilla adaptable de miniaturas de la galería */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); /* Relleno dinámico de fotos cuadradas */
+  gap: 10px;
+  overflow-y: auto;
+  max-height: 50vh;
+  padding-right: 4px;
+}
+
+.gallery-item {
+  aspect-ratio: 1; /* Garantiza proporción 1:1 cuadrada */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  border-color: #ff4e3e;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/**=======================================================================
+**              5. LISTA Y ACORDEÓN DE ELIMINACIÓN DE PRODUCTOS
+**========================================================================== */
+
 .delete-category-accordion {
   background: #111618;
   border-radius: 8px;
@@ -185,16 +352,21 @@
   height: 45px;
   object-fit: cover;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .delete-card-info {
   flex: 1;
+  min-width: 0;
 }
 
 .delete-card-info h4 {
   color: #ffffff;
   font-size: 0.85rem;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .delete-card-price {
@@ -211,4 +383,22 @@
   border-radius: 6px;
   font-size: 0.8rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-delete-product:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+
+/**=======================================================================
+**              6. ADAPTABILIDAD RESPONSIVE MÓVIL
+**========================================================================== */
+
+@media (max-width: 400px) {
+  /* Pasa campos de precio e insignias a 1 columna en pantallas muy angostas */
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

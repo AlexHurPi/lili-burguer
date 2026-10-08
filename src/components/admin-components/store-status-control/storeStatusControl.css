@@ -287,7 +287,76 @@
   100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
 }
 
+/* Banner de advertencia (Warning / Cambios pendientes) */
+.status-alert-banner.warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+}
 
+/* Animación sutil para el botón de guardar cuando hay cambios pendientes */
+.btn-save-store-status.pending-changes {
+  border: 2px solid #f59e0b;
+  animation: pulse-button 1.8s infinite;
+}
+
+@keyframes pulse-button {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Badge Único de Estado */
+.current-status-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* Sub-etiqueta integrada cuando hay cambios pendientes */
+.status-badge-pending-tag {
+  font-size: 0.75rem;
+  color: #fbbf24;
+  background-color: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Texto guía sobre el botón de guardar */
+.save-action-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.save-hint-text {
+  color: #fbbf24;
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /**========================================================================
 **                 HORARIO SEMANAL (SUBCOMPONENTE)
 **========================================================================*/

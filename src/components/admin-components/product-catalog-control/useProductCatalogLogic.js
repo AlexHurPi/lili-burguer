@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
-import { uploadImageToR2 } from '../../../services/r2Service';
+import { listR2Images, uploadImageToR2 } from '../../../services/r2Service';
+
 
 export const useProductCatalogLogic = () => {
   const { menuData } = useMenu();
@@ -29,6 +30,11 @@ export const useProductCatalogLogic = () => {
   const [deletingId, setDeletingId] = useState(null);
   const [toast, setToast] = useState({ show: false, type: '', message: '' });
 
+  // 📂 Estados para la Galería de Medios R2
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [isLoadingGallery, setIsLoadingGallery] = useState(false);
+
   // Lista de categorías existentes para el selector
   const [categoriesList, setCategoriesList] = useState([]);
 
@@ -53,6 +59,27 @@ export const useProductCatalogLogic = () => {
     }
   }, [menuData]);
 
+  // Abrir modal y cargar lista de imágenes desde Cloudflare
+  const handleOpenGallery = async () => {
+    setIsGalleryOpen(true);
+    setIsLoadingGallery(true);
+    try {
+      const images = await listR2Images();
+      setGalleryImages(images);
+    } catch (error) {
+      showToast('error', 'No se pudieron cargar las imágenes de Cloudflare R2.');
+    } finally {
+      setIsLoadingGallery(false);
+    }
+  };
+
+  // Seleccionar una foto de la Galería R2
+  const handleSelectFromGallery = (url) => {
+    setFormData((prev) => ({ ...prev, imageUrl: url }));
+    setImagePreview(url);
+    setImageFile(null); // Al seleccionar de R2, cancelamos la subida de archivo local
+    setIsGalleryOpen(false);
+  };
   const showToast = (type, message) => {
     setToast({ show: true, type, message });
     setTimeout(() => {
@@ -62,6 +89,12 @@ export const useProductCatalogLogic = () => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Si el usuario escribe o pega manualmente una URL, limpiamos la selección de archivo local
+    if (field === 'imageUrl' && imageFile) {
+      setImageFile(null);
+      setImagePreview(value);
+    }
   };
 
   // Validación y previsualización de imagen elegida
@@ -78,6 +111,9 @@ export const useProductCatalogLogic = () => {
     setImageFile(file);
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
+
+    // 🎯 Sincroniza la URL/previsualización en la caja de texto del formulario
+    setFormData((prev) => ({ ...prev, imageUrl: previewUrl }));
   };
 
   // Crear Producto Nuevo
@@ -214,6 +250,13 @@ export const useProductCatalogLogic = () => {
     handleInputChange,
     handleFileChange,
     handleCreateProduct,
-    handleDeleteProduct
+    handleDeleteProduct,
+
+    isGalleryOpen,
+    galleryImages,
+    isLoadingGallery,
+    setIsGalleryOpen,
+    handleOpenGallery,
+    handleSelectFromGallery
   };
 };

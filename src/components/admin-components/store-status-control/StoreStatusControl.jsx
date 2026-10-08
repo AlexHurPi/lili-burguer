@@ -3,7 +3,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import './storeStatusControl.css';
-import StoreScheduleControl from './StoreScheduleControl'; // Importamos el subcomponente
+import StoreScheduleControl from './StoreScheduleControl';
 
 const StoreStatusControl = () => {
   const { menuData } = useMenu();
@@ -11,7 +11,7 @@ const StoreStatusControl = () => {
   const [feedbackMsg, setFeedbackMsg] = useState({ type: '', text: '' });
   const [whatsappNumber, setWhatsappNumber] = useState('573228737508');
 
-  // Estados locales para el formulario
+  // Estado del borrador local
   const [manualOverride, setManualOverride] = useState('none');
   const [messages, setMessages] = useState({
     openBanner: '',
@@ -20,7 +20,6 @@ const StoreStatusControl = () => {
     scheduledOrderHeader: ''
   });
 
-  // Mensajes por defecto
   const DEFAULT_MESSAGES = {
     openBanner: '🟢 ¡Estamos Abiertos! Toma tu pedido ahora',
     closedBanner: '🔴 Tienda Cerrada • Abrimos a las 4:00 PM',
@@ -36,7 +35,7 @@ const StoreStatusControl = () => {
     notePlaceholder: 'Sugerencia (ej: sin cebolla, salsa aparte...)'
   };
 
-  // Cargar datos actuales
+  // Cargar datos reales desde Firestore / Context
   useEffect(() => {
     if (menuData?.storeStatus) {
       const storeMsgs = menuData.storeStatus.messages || {};
@@ -60,6 +59,25 @@ const StoreStatusControl = () => {
       });
     }
   }, [menuData]);
+
+  // Estado real guardado en Firestore (para el Badge superior)
+  const liveOverride = menuData?.storeStatus?.manualOverride || 'none';
+  // Indica si el usuario seleccionó un modo diferente que aún no ha guardado
+  const hasUnsavedOverride = manualOverride !== liveOverride;
+
+  // Manejador de selección de modo con aviso toast
+  const handleSelectOverride = (newMode) => {
+    setManualOverride(newMode);
+
+    if (newMode !== liveOverride) {
+      setFeedbackMsg({
+        type: 'warning',
+        text: '⚠️ Cambio pendiente: Recuerda tocar "GUARDAR MODO Y MENSAJES" para aplicarlo en vivo.'
+      });
+    } else {
+      setFeedbackMsg({ type: '', text: '' });
+    }
+  };
 
   // Guardar cambios en Firestore
   const handleSaveStatus = async (e) => {
@@ -86,13 +104,13 @@ const StoreStatusControl = () => {
 
       setFeedbackMsg({
         type: 'success',
-        text: '¡Estado de la tienda actualizado en tiempo real!'
+        text: '¡Estado de la tienda actualizado en vivo correctamente!'
       });
     } catch (error) {
       console.error('Error al actualizar Firestore:', error);
       setFeedbackMsg({
         type: 'error',
-        text: 'Error al guardar los cambios. Intenta de nuevo.'
+        text: 'Error al guardar los cambios en la base de datos.'
       });
     } finally {
       setSaving(false);
@@ -107,30 +125,38 @@ const StoreStatusControl = () => {
         <p>Ajusta la disponibilidad y los mensajes de aviso para tus clientes.</p>
       </div>
 
-      {/* 🎯 1. BADGE DE ESTADO ACTUAL EN VIVO */}
-      <div className={`current-status-badge ${manualOverride}`}>
-        {manualOverride === 'force_open' && '🟢 ESTADO ACTUAL: FORZADO ABIERTO'}
-        {manualOverride === 'force_closed' && '🔴 ESTADO ACTUAL: CERRADO (Emergencia)'}
-        {manualOverride === 'none' && '⏳ ESTADO ACTUAL: AUTOMÁTICO (Según horario)'}
+      {/* 🎯 1. BADGE ÚNICO DE ESTADO (Integra la alerta sin duplicar tarjetas) */}
+    <div className={`current-status-badge ${liveOverride}`}>
+      <div className="status-badge-main">
+        {liveOverride === 'force_open' && '🟢 ESTADO REAL EN VIVO: FORZADO ABIERTO'}
+        {liveOverride === 'force_closed' && '🔴 ESTADO REAL EN VIVO: CERRADO (Emergencia)'}
+        {liveOverride === 'none' && '⏳ ESTADO REAL EN VIVO: AUTOMÁTICO (Según horario)'}
       </div>
-
-      {feedbackMsg.text && (
-        <div className={`status-alert-banner ${feedbackMsg.type}`}>
-          {feedbackMsg.text}
+    {/* Sub-etiqueta sutil integrada solo si hay un cambio sin guardar */}
+      {hasUnsavedOverride && (
+        <div className="status-badge-pending-tag">
+          ⚠️ Selección pendiente por guardar
         </div>
       )}
+    </div>
+      {/* 🎯 2. BANNER DE NOTIFICACIÓN (Solo para mensajes de Éxito o Error de Firestore) */}
+    {feedbackMsg.text && feedbackMsg.type !== 'warning' && (
+      <div className={`status-alert-banner ${feedbackMsg.type}`}>
+        {feedbackMsg.text}
+      </div>
+    )}
 
-      {/* 🎯 2. FORMULARIO PRINCIPAL: Override y Mensajes */}
+      {/* Formulario Principal */}
       <form onSubmit={handleSaveStatus} className="store-control-form">
         
-        {/* MODO DE OPERACIÓN (Expuesto por prioridad) */}
+        {/* MODO DE OPERACIÓN INMEDIATO */}
         <div className="control-section">
           <label className="section-title">Modo de Operación Inmediato</label>
           <div className="override-options-grid">
             <button
               type="button"
               className={`override-btn auto ${manualOverride === 'none' ? 'selected' : ''}`}
-              onClick={() => setManualOverride('none')}
+              onClick={() => handleSelectOverride('none')}
             >
               <span className="btn-icon">⏰</span>
               <div className="btn-text">
@@ -142,7 +168,7 @@ const StoreStatusControl = () => {
             <button
               type="button"
               className={`override-btn force-open ${manualOverride === 'force_open' ? 'selected' : ''}`}
-              onClick={() => setManualOverride('force_open')}
+              onClick={() => handleSelectOverride('force_open')}
             >
               <span className="btn-icon">🟢</span>
               <div className="btn-text">
@@ -154,7 +180,7 @@ const StoreStatusControl = () => {
             <button
               type="button"
               className={`override-btn force-closed ${manualOverride === 'force_closed' ? 'selected' : ''}`}
-              onClick={() => setManualOverride('force_closed')}
+              onClick={() => handleSelectOverride('force_closed')}
             >
               <span className="btn-icon">🔴</span>
               <div className="btn-text">
@@ -165,7 +191,7 @@ const StoreStatusControl = () => {
           </div>
         </div>
 
-        {/* MENSAJES DE LA APLICACIÓN Y CONTACTO (Plegado por ser secundario) */}
+        {/* MENSAJES DE LA APLICACIÓN Y CONTACTO */}
         <div className="control-section">
           <details className="admin-collapsible-section">
             <summary className="section-title collapsible-title">
@@ -173,7 +199,6 @@ const StoreStatusControl = () => {
             </summary>
 
             <div className="collapsible-content">
-              {/* Teléfono de WhatsApp */}
               <div className="form-group-admin">
                 <label htmlFor="whatsappNumber">📱 Número de WhatsApp:</label>
                 <input
@@ -187,7 +212,6 @@ const StoreStatusControl = () => {
 
               <hr className="admin-divider" />
 
-              {/* Banners Principales */}
               <div className="form-group-admin">
                 <label htmlFor="openBanner">Banner cuando está Abierto:</label>
                 <input
@@ -220,7 +244,6 @@ const StoreStatusControl = () => {
 
               <hr className="admin-divider" />
 
-              {/* Textos del Carrito y Botones */}
               <div className="form-group-admin">
                 <label htmlFor="deliveryNotice">Aviso de Domicilio en Carrito:</label>
                 <input
@@ -283,7 +306,6 @@ const StoreStatusControl = () => {
 
               <hr className="admin-divider" />
 
-              {/* Formato de Mensaje de WhatsApp */}
               <div className="form-group-admin">
                 <label htmlFor="scheduledOrderHeader">Encabezado para Pedido Programado:</label>
                 <input
@@ -317,23 +339,23 @@ const StoreStatusControl = () => {
           </details>
         </div>
 
-        {/* 🎯 3. FEEDBACK EN BOTÓN DE GUARDAR */}
+        {/* BOTÓN DE GUARDAR CON ESTADO DE CAMBIOS PENDIENTES */}
         <button 
           type="submit" 
-          className={`btn-save-store-status ${manualOverride === 'force_closed' ? 'alert-danger' : ''}`} 
+          className={`btn-save-store-status ${hasUnsavedOverride ? 'pending-changes' : ''} ${manualOverride === 'force_closed' ? 'alert-danger' : ''}`} 
           disabled={saving}
         >
           {saving 
             ? '⏳ Guardando...' 
-            : manualOverride === 'force_closed' 
-              ? '⚠️ CONFIRMAR CIERRE DE TIENDA' 
+            : hasUnsavedOverride 
+              ? '💾 APLICAR Y GUARDAR CAMBIOS EN VIVO' 
               : '💾 GUARDAR MODO Y MENSAJES'}
         </button>
       </form>
 
       <hr className="admin-divider" style={{ margin: '24px 0', borderColor: 'rgba(255,255,255,0.1)' }} />
 
-      {/* 📅 4. SUBCOMPONENTE: Horario Semanal (Totalmente Independiente) */}
+      {/* Subcomponente independiente para la configuración del horario */}
       <StoreScheduleControl />
 
     </div>

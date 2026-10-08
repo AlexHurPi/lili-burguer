@@ -13,6 +13,14 @@ const ProductCatalogControl = () => {
     isSaving,
     deletingId,
     toast,
+    // Estados y funciones de la Galería Cloudflare R2
+    isGalleryOpen,
+    galleryImages,
+    isLoadingGallery,
+    setIsGalleryOpen,
+    handleOpenGallery,
+    handleSelectFromGallery,
+    // Manejadores del formulario y catálogo
     handleInputChange,
     handleFileChange,
     handleCreateProduct,
@@ -32,7 +40,7 @@ const ProductCatalogControl = () => {
       <section className="catalog-card-section">
         <div className="catalog-header">
           <h2>➕ Agregar Nuevo Producto</h2>
-          <p>Completa los campos para dar de alta un producto en el menú en vivo[cite: 1].</p>
+          <p>Completa los campos para dar de alta un producto en el menú en vivo.</p>
         </div>
 
         <form onSubmit={handleCreateProduct} className="catalog-form">
@@ -151,30 +159,28 @@ const ProductCatalogControl = () => {
           <div className="form-group">
             <label className="form-label">Imagen del Producto:</label>
             <p className="image-notice-text">
-              💡 Recomendación: Utiliza imágenes en formato liviano <strong>.webp</strong> optimizadas para móvil[cite: 1].
+              💡 Recomendación: Utiliza imágenes en formato liviano <strong>.webp</strong> optimizadas para móvil.
             </p>
 
             <div className="image-upload-wrapper">
               <label className="custom-file-upload">
                 <input type="file" accept="image/*" onChange={handleFileChange} />
-                📷 Seleccionar Foto de Cámara / Galería
+                📷 Tomar / Subir Foto Nueva
               </label>
 
-              <span className="upload-separator">ó pegar URL directa:</span>
-
-              <input
-                type="text"
-                className="form-control"
-                placeholder="https://..."
-                value={formData.imageUrl}
-                onChange={(e) => handleInputChange('imageUrl', e.target.value)}
-              />
+              <button
+                type="button"
+                className="btn-open-gallery"
+                onClick={handleOpenGallery}
+              >
+                📂 Elegir de Galería R2
+              </button>
             </div>
 
-            {/* Vista Previa de la Fotografía */}
+            {/* Vista Previa de la Fotografía Seleccionada */}
             {(imagePreview || formData.imageUrl) && (
               <div className="image-preview-container">
-                <p>Vista Previa de la Fotografía:</p>
+                <p>Imagen Seleccionada:</p>
                 <img
                   src={imagePreview || formData.imageUrl}
                   alt="Previsualización"
@@ -200,7 +206,7 @@ const ProductCatalogControl = () => {
       <section className="catalog-card-section">
         <div className="catalog-header">
           <h2>🗑️ Eliminación y Retiro de Productos</h2>
-          <p>Consulta los productos existentes y retíralos de Firestore con confirmación[cite: 1].</p>
+          <p>Consulta los productos existentes y retíralos de Firestore con confirmación.</p>
         </div>
 
         <div className="categories-delete-list">
@@ -224,9 +230,12 @@ const ProductCatalogControl = () => {
                       />
                       <div className="delete-card-info">
                         <h4>{item.productTitle}</h4>
-                        <p className="delete-card-price">${item.offerPrice || item.regularPrice || item.price}</p>
+                        <p className="delete-card-price">
+                          ${item.offerPrice || item.regularPrice || item.price}
+                        </p>
                       </div>
                       <button
+                        type="button"
                         className="btn-delete-product"
                         disabled={deletingId === item.id}
                         onClick={() => handleDeleteProduct(catKey, item.id)}
@@ -241,6 +250,42 @@ const ProductCatalogControl = () => {
           })}
         </div>
       </section>
+
+      {/* 🖼️ MODAL DE GALERÍA R2 */}
+      {isGalleryOpen && (
+        <div className="media-modal-overlay">
+          <div className="media-modal-content">
+            <div className="media-modal-header">
+              <h3>📂 Galería de Imágenes en Cloudflare R2</h3>
+              <button
+                type="button"
+                className="btn-close-modal"
+                onClick={() => setIsGalleryOpen(false)}
+              >
+                ✖
+              </button>
+            </div>
+
+            {isLoadingGallery ? (
+              <p className="loading-gallery-text">⏳ Cargando imágenes desde R2...</p>
+            ) : galleryImages.length === 0 ? (
+              <p className="loading-gallery-text">No hay imágenes en la carpeta /products de R2.</p>
+            ) : (
+              <div className="gallery-grid">
+                {galleryImages.map((imgUrl, index) => (
+                  <div
+                    key={index}
+                    className="gallery-item"
+                    onClick={() => handleSelectFromGallery(imgUrl)}
+                  >
+                    <img src={imgUrl} alt={`R2 ${index}`} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
