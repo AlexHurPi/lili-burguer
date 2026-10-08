@@ -1,7 +1,7 @@
   /* Reset base para que los componentes hereden correctamente */
-@font-face{    
-    font-family:jost;
-    src: url(fonts/static/Jost-ExtraLight.ttf);
+@font-face {
+  font-family: 'Jost-ExtraLight';
+  src: url('/fonts/static/Jost-ExtraLight.ttf');
 }
 
 @font-face {
