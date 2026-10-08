@@ -61,9 +61,7 @@ const Inicio = () => {
       
       <WhatsappButton />
       <Kart />
-      <button onClick={migrarMenuAFirestore} style={{ padding: '12px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', margin: '20px' }}>
-      🚀 Subir spanish.json a Firebase
-      </button>
+      
 
       <Footer dataKey="footer" />
     </div>
