@@ -1,7 +1,7 @@
 import React from 'react';
 import { useProductCatalogLogic } from './useProductCatalogLogic';
 import { useMenu } from '../../../context/MenuContext';
-import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2'; // 👈 Importamos el selector reusable
+import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2';
 import CategoryOrderControl from './CategoryOrderControl';
 import './productCatalogControl.css';
 

@@ -4,7 +4,6 @@ import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import { listR2Images, uploadImageToR2 } from '../../../services/r2Service';
 
-
 export const useProductCatalogLogic = () => {
   const { menuData } = useMenu();
 
@@ -30,7 +29,7 @@ export const useProductCatalogLogic = () => {
   const [deletingId, setDeletingId] = useState(null);
   const [toast, setToast] = useState({ show: false, type: '', message: '' });
 
-  // 📂 Estados para la Galería de Medios R2
+  // Estados para la Galería de Medios R2
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
   const [isLoadingGallery, setIsLoadingGallery] = useState(false);
@@ -38,36 +37,67 @@ export const useProductCatalogLogic = () => {
   // Lista de categorías existentes para el selector
   const [categoriesList, setCategoriesList] = useState([]);
 
-      useEffect(() => {
-      if (menuData?.cards) {
-        const keys = Object.keys(menuData.cards).sort((a, b) => {
-          const orderList = menuData?.categoryOrder || [];
-          const indexA = orderList.indexOf(a);
-          const indexB = orderList.indexOf(b);
+  useEffect(() => {
+    if (menuData?.cards) {
+      const keys = Object.keys(menuData.cards).sort((a, b) => {
+        const orderList = menuData?.categoryOrder || [];
+        const indexA = orderList.indexOf(a);
+        const indexB = orderList.indexOf(b);
 
-          if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-          if (indexA !== -1) return -1;
-          if (indexB !== -1) return 1;
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
 
-          const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
-          const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
-          return numA - numB;
-        });
+        const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+        const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+        return numA - numB;
+      });
 
-        const list = keys.map((key) => {
-          const catProducts = menuData.cards[key] || [];
-          const title = catProducts[0]?.categoryTitle || `Categoría ${key}`;
-          return { key, title };
-        });
+      const list = keys.map((key) => {
+        const catProducts = menuData.cards[key] || [];
+        const title = catProducts[0]?.categoryTitle || `Categoría ${key}`;
+        return { key, title };
+      });
 
-        setCategoriesList(list);
-        if (list.length > 0 && !formData.categoryKey) {
-          setFormData((prev) => ({ ...prev, categoryKey: list[0].key }));
-        }
+      setCategoriesList(list);
+      if (list.length > 0 && !formData.categoryKey) {
+        setFormData((prev) => ({ ...prev, categoryKey: list[0].key }));
       }
-    }, [menuData]);
+    }
+  }, [menuData]);
 
-  // Abrir modal y cargar lista de imágenes desde Cloudflare
+  const showToast = (type, message) => {
+    setToast({ show: true, type, message });
+    setTimeout(() => {
+      setToast({ show: false, type: '', message: '' });
+    }, 4000);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
+    if (field === 'imageUrl' && imageFile) {
+      setImageFile(null);
+      setImagePreview(value);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showToast('error', 'Por favor selecciona un archivo de imagen válido (.jpg, .png, .webp).');
+      e.target.value = '';
+      return;
+    }
+
+    setImageFile(file);
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl);
+    setFormData((prev) => ({ ...prev, imageUrl: previewUrl }));
+  };
+
   const handleOpenGallery = async () => {
     setIsGalleryOpen(true);
     setIsLoadingGallery(true);
@@ -81,44 +111,14 @@ export const useProductCatalogLogic = () => {
     }
   };
 
-  // Seleccionar una foto de la Galería R2
   const handleSelectFromGallery = (url) => {
     setFormData((prev) => ({ ...prev, imageUrl: url }));
     setImagePreview(url);
-    setImageFile(null); // Al seleccionar de R2, cancelamos la subida de archivo local
+    setImageFile(null);
     setIsGalleryOpen(false);
   };
-  const showToast = (type, message) => {
-    setToast({ show: true, type, message });
-    setTimeout(() => {
-      setToast({ show: false, type: '', message: '' });
-    }, 4000);
-  };
 
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-
-    // Si el usuario escribe o pega manualmente una URL, limpiamos la selección de archivo local
-    if (field === 'imageUrl' && imageFile) {
-      setImageFile(null);
-      setImagePreview(value);
-    }
-  };
-
-  
-  // Manejador cuando se toma/selecciona una foto desde la cámara o dispositivo local
-const handleFileChange = (file, tempPreview) => {
-  setImageFile(file);
-  setImagePreview(tempPreview);
-  handleInputChange('imageUrl', tempPreview);
-};
-// Manejador cuando se selecciona una foto existente de la Galería R2
-const handleGallerySelect = (url) => {
-  setImageFile(null); // Cancelamos subida binaria pues ya existe en Cloudflare R2
-  setImagePreview(url);
-  handleInputChange('imageUrl', url);
-};
-  // Crear Producto Nuevo
+  // Crear Producto Nuevo y/o Nueva Categoría
   const handleCreateProduct = async (e) => {
     e.preventDefault();
 
@@ -130,15 +130,6 @@ const handleGallerySelect = (url) => {
     if (formData.isNewCategory && !formData.newCategoryTitle.trim()) {
       showToast('error', 'Escribe el nombre de la nueva categoría.');
       return;
-    }
-    // Dentro de la función que guarda el producto con una categoría NUEVA:
-    if (formData.isNewCategory) {
-      const newCategoryKey = getNextCategoryKey(); // ej: 'card16'
-
-      await updateDoc(doc(db, "menu", "spanish"), {
-        [`cards.${newCategoryKey}`]: [newProductObj],
-        categoryOrder: arrayUnion(newCategoryKey) // 👈 Agrega la nueva categoría al final de la secuencia
-      });
     }
 
     setIsSaving(true);
@@ -153,15 +144,18 @@ const handleGallerySelect = (url) => {
         setIsUploading(false);
       }
 
-      // 2. Determinar la clave de la categoría
+      // 2. Determinar la clave de la categoría y su título
       let targetCatKey = formData.categoryKey;
       let categoryTitle = '';
-
       const currentCards = menuData?.cards || {};
 
       if (formData.isNewCategory) {
-        const nextNum = Object.keys(currentCards).length + 1;
-        targetCatKey = `card${nextNum}`;
+        // Generar una clave única buscando el número más alto existente
+        const existingNumbers = Object.keys(currentCards).map((k) =>
+          parseInt(k.replace(/\D/g, ''), 10) || 0
+        );
+        const maxNum = existingNumbers.length > 0 ? Math.max(...existingNumbers) : 0;
+        targetCatKey = `card${maxNum + 1}`;
         categoryTitle = formData.newCategoryTitle.trim();
       } else {
         categoryTitle =
@@ -172,7 +166,7 @@ const handleGallerySelect = (url) => {
 
       const existingProducts = currentCards[targetCatKey] || [];
 
-      // 3. Construir el nuevo objeto de producto
+      // 3. Construir el objeto del nuevo producto
       const newProduct = {
         id: `prod_${Date.now()}`,
         order: existingProducts.length + 1,
@@ -193,15 +187,22 @@ const handleGallerySelect = (url) => {
 
       const updatedCategoryArray = [...existingProducts, newProduct];
 
-      // 4. Actualizar Firestore
+      // 4. Preparar payload y actualizar Firestore
       const docRef = doc(db, 'menu', 'spanish');
-      await updateDoc(docRef, {
+      const updateData = {
         [`cards.${targetCatKey}`]: updatedCategoryArray
-      });
+      };
 
-      showToast('success', `¡Producto "${newProduct.productTitle}" agregado con éxito!`);
+      // Si es una categoría nueva, se agrega su clave al arreglo global categoryOrder
+      if (formData.isNewCategory) {
+        updateData.categoryOrder = arrayUnion(targetCatKey);
+      }
 
-      // Resetear formulario
+      await updateDoc(docRef, updateData);
+
+      showToast('success', `¡Producto "${newProduct.productTitle}" guardado con éxito!`);
+
+      // Resetear el formulario
       setFormData({
         categoryKey: targetCatKey,
         isNewCategory: false,
@@ -217,15 +218,14 @@ const handleGallerySelect = (url) => {
       setImageFile(null);
       setImagePreview('');
     } catch (error) {
-      console.error('Error al crear el producto:', error);
-      showToast('error', 'Error al guardar el nuevo producto en Firestore.');
+      console.error('Error al crear el producto o categoría:', error);
+      showToast('error', 'Error al guardar en Firestore.');
     } finally {
       setIsSaving(false);
       setIsUploading(false);
     }
   };
 
-  // Eliminar un producto definitivamente
   const handleDeleteProduct = async (catKey, productId) => {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este producto definitivamente del menú?')) {
       return;
@@ -262,7 +262,6 @@ const handleGallerySelect = (url) => {
     handleFileChange,
     handleCreateProduct,
     handleDeleteProduct,
-    handleGallerySelect,
     isGalleryOpen,
     galleryImages,
     isLoadingGallery,
