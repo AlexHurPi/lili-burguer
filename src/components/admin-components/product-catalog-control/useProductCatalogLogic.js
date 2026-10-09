@@ -4,6 +4,7 @@ import { useMenu } from '../../../context/MenuContext';
 import { listR2Images, uploadImageToR2 } from '../../../services/r2Service';
 import { doc, updateDoc, arrayUnion, deleteField, arrayRemove } from 'firebase/firestore';
 
+// Hook personalizado
 export const useProductCatalogLogic = () => {
   const { menuData } = useMenu();
 
