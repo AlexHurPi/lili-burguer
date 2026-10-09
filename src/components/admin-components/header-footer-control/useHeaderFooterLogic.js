@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
+import { uploadImageToR2 } from '../../../services/r2Service'; // 👈 Importamos el servicio R2
 
 export const useHeaderFooterLogic = () => {
   const { menuData } = useMenu();
@@ -31,6 +32,7 @@ export const useHeaderFooterLogic = () => {
     final: ''
   });
 
+  const [imageFile, setImageFile] = useState(null); // Archivo binario local si seleccionó de galería/cámara
   const [imagePreview, setImagePreview] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [toast, setToast] = useState({ show: false, type: '', message: '' });
@@ -83,20 +85,18 @@ export const useHeaderFooterLogic = () => {
     setFooterForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Manejo y Validación de Archivo de Imagen
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // Manejador cuando el usuario elige un archivo desde la cámara/dispositivo
+  const handleFileChange = (file, tempPreview) => {
+    setImageFile(file);
+    setImagePreview(tempPreview);
+    handleHeaderChange('image', tempPreview);
+  };
 
-    if (!file.type.startsWith('image/')) {
-      showToast('error', 'El archivo seleccionado no es una imagen válida.');
-      e.target.value = '';
-      return;
-    }
-
-    const previewUrl = URL.createObjectURL(file);
-    setImagePreview(previewUrl);
-    handleHeaderChange('image', previewUrl);
+  // Manejador cuando el usuario elige una imagen existente en la Galería R2
+  const handleGallerySelect = (url) => {
+    setImageFile(null); // Cancelamos subida binaria porque ya existe en R2
+    setImagePreview(url);
+    handleHeaderChange('image', url);
   };
 
   const handleSaveAll = async (e) => {
@@ -104,11 +104,28 @@ export const useHeaderFooterLogic = () => {
     setIsSaving(true);
 
     try {
+      let finalHeaderImage = headerForm.image;
+
+      // 1. Si se seleccionó una foto local nueva, la subimos a R2
+      if (imageFile) {
+        finalHeaderImage = await uploadImageToR2(imageFile);
+      }
+
+      const updatedHeader = {
+        ...headerForm,
+        image: finalHeaderImage
+      };
+
+      // 2. Actualizamos Firestore
       const docRef = doc(db, 'menu', 'spanish');
       await updateDoc(docRef, {
-        header: headerForm,
+        header: updatedHeader,
         footer: footerForm
       });
+
+      setHeaderForm(updatedHeader);
+      setImagePreview(finalHeaderImage);
+      setImageFile(null);
 
       showToast('success', '¡Información institucional guardada con éxito!');
     } catch (error) {
@@ -125,10 +142,10 @@ export const useHeaderFooterLogic = () => {
     imagePreview,
     isSaving,
     toast,
-    setImagePreview,
     handleHeaderChange,
     handleFooterChange,
     handleFileChange,
+    handleGallerySelect,
     handleSaveAll
   };
 };

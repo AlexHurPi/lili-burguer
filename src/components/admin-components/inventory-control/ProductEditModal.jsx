@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { formatCurrencyInput, unformatCurrency } from './useInventoryLogic';
-import { ImageSelectorR2 } from '../Image-selector/ImageSelectorR2'; 
+import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2'; 
 import { uploadImageToR2 } from '../../../services/r2Service';
 
 const DAYS_MAP = [

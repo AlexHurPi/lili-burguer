@@ -1,18 +1,20 @@
 import React from 'react';
 import { useHeaderFooterLogic } from './useHeaderFooterLogic';
+import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2';
 import './headerFooterControl.css';
 
 const HeaderFooterControl = () => {
   const {
     headerForm,
     footerForm,
+
     imagePreview,
     isSaving,
     toast,
-    setImagePreview,
     handleHeaderChange,
     handleFooterChange,
     handleFileChange,
+    handleGallerySelect,
     handleSaveAll
   } = useHeaderFooterLogic();
 
@@ -58,57 +60,17 @@ const HeaderFooterControl = () => {
             </div>
           </div>
 
-          <div className="hf-form-group">
-            <label>Imagen del Encabezado:</label>
-            
-            <div className="file-format-notice">
-              ⚡ <strong>Recomendación:</strong> Utiliza preferiblemente formato <code>.webp</code> e imágenes livianas (menos de 300 KB) para asegurar una carga ultra rápida en celulares.
-            </div>
-
-            <div className="image-uploader-wrapper">
-              <input
-                type="file"
-                id="header-image-input"                                             
-                accept="image/*"
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-              />
-
-              <label htmlFor="header-image-input" className="btn-upload-label">
-                📷 Seleccionar de Galería / Tomar Foto
-              </label>
-
-              <input
-                type="text"
-                value={headerForm.image}
-                readOnly
-                onChange={(e) => {
-                  handleHeaderChange('image', e.target.value);
-                  setImagePreview(e.target.value);
-                }}
-                placeholder="O pega la URL directa de la imagen: ./images/Encabezado.webp"
-                className="input-url-fallback"
-              />
-            </div>
-
-            {(imagePreview || headerForm.image) && (
-              <div className="header-preview-box">
-                <span>Vista Previa:</span>
-                <img
-                  src={imagePreview || headerForm.image}
-                  alt="Vista previa del encabezado"
-                  className="header-preview-img"
-                  onError={(e) => (e.target.style.display = 'none')}
-                />
-              </div>
-            )}
-          </div>
+          {/* 🎯 COMPONENTE REUTILIZABLE IMAGE SELECTOR R2 */}
+          <ImageSelectorR2
+            currentImage={imagePreview || headerForm.image}
+            onImageChange={handleGallerySelect}
+            onFileChange={handleFileChange}
+          />
         </div>
 
-        {/* Sección 2: Información General de la Empresa */}
+        {/* Sección 2: Datos Generales */}
         <div className="hf-form-section">
           <h3 className="section-title">🏢 Datos Generales de la Empresa</h3>
-          
           <div className="form-row-two">
             <div className="hf-form-group">
               <label>Nombre Comercial (Empresa):</label>
@@ -282,7 +244,7 @@ const HeaderFooterControl = () => {
           </div>
         </div>
 
-        {/* Sección 5: Cierre de Pie de Página */}
+        {/* Sección 5: Copyright */}
         <div className="hf-form-section">
           <h3 className="section-title">©️ Texto de Copyright (Footer Final)</h3>
           <div className="hf-form-group">

@@ -38,26 +38,34 @@ export const useProductCatalogLogic = () => {
   // Lista de categorías existentes para el selector
   const [categoriesList, setCategoriesList] = useState([]);
 
-  useEffect(() => {
-    if (menuData?.cards) {
-      const keys = Object.keys(menuData.cards).sort((a, b) => {
-        const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
-        const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
-        return numA - numB;
-      });
+      useEffect(() => {
+      if (menuData?.cards) {
+        const keys = Object.keys(menuData.cards).sort((a, b) => {
+          const orderList = menuData?.categoryOrder || [];
+          const indexA = orderList.indexOf(a);
+          const indexB = orderList.indexOf(b);
 
-      const list = keys.map((key) => {
-        const catProducts = menuData.cards[key] || [];
-        const title = catProducts[0]?.categoryTitle || `Categoría ${key}`;
-        return { key, title };
-      });
+          if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+          if (indexA !== -1) return -1;
+          if (indexB !== -1) return 1;
 
-      setCategoriesList(list);
-      if (list.length > 0 && !formData.categoryKey) {
-        setFormData((prev) => ({ ...prev, categoryKey: list[0].key }));
+          const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+          const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+          return numA - numB;
+        });
+
+        const list = keys.map((key) => {
+          const catProducts = menuData.cards[key] || [];
+          const title = catProducts[0]?.categoryTitle || `Categoría ${key}`;
+          return { key, title };
+        });
+
+        setCategoriesList(list);
+        if (list.length > 0 && !formData.categoryKey) {
+          setFormData((prev) => ({ ...prev, categoryKey: list[0].key }));
+        }
       }
-    }
-  }, [menuData]);
+    }, [menuData]);
 
   // Abrir modal y cargar lista de imágenes desde Cloudflare
   const handleOpenGallery = async () => {
@@ -97,25 +105,19 @@ export const useProductCatalogLogic = () => {
     }
   };
 
-  // Validación y previsualización de imagen elegida
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      showToast('error', 'Por favor selecciona un archivo de imagen válido (.jpg, .png, .webp).');
-      e.target.value = '';
-      return;
-    }
-
-    setImageFile(file);
-    const previewUrl = URL.createObjectURL(file);
-    setImagePreview(previewUrl);
-
-    // 🎯 Sincroniza la URL/previsualización en la caja de texto del formulario
-    setFormData((prev) => ({ ...prev, imageUrl: previewUrl }));
-  };
-
+  
+  // Manejador cuando se toma/selecciona una foto desde la cámara o dispositivo local
+const handleFileChange = (file, tempPreview) => {
+  setImageFile(file);
+  setImagePreview(tempPreview);
+  handleInputChange('imageUrl', tempPreview);
+};
+// Manejador cuando se selecciona una foto existente de la Galería R2
+const handleGallerySelect = (url) => {
+  setImageFile(null); // Cancelamos subida binaria pues ya existe en Cloudflare R2
+  setImagePreview(url);
+  handleInputChange('imageUrl', url);
+};
   // Crear Producto Nuevo
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -260,7 +262,7 @@ export const useProductCatalogLogic = () => {
     handleFileChange,
     handleCreateProduct,
     handleDeleteProduct,
-
+    handleGallerySelect,
     isGalleryOpen,
     galleryImages,
     isLoadingGallery,

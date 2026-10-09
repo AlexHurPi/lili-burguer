@@ -1,8 +1,9 @@
 import React from 'react';
 import { useProductCatalogLogic } from './useProductCatalogLogic';
 import { useMenu } from '../../../context/MenuContext';
-import './productCatalogControl.css';
+import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2'; // 👈 Importamos el selector reusable
 import CategoryOrderControl from './CategoryOrderControl';
+import './productCatalogControl.css';
 
 const ProductCatalogControl = () => {
   const { menuData } = useMenu();
@@ -14,16 +15,10 @@ const ProductCatalogControl = () => {
     isSaving,
     deletingId,
     toast,
-    // Estados y funciones de la Galería Cloudflare R2
-    isGalleryOpen,
-    galleryImages,
-    isLoadingGallery,
-    setIsGalleryOpen,
-    handleOpenGallery,
-    handleSelectFromGallery,
     // Manejadores del formulario y catálogo
     handleInputChange,
     handleFileChange,
+    handleGallerySelect,
     handleCreateProduct,
     handleDeleteProduct
   } = useProductCatalogLogic();
@@ -159,40 +154,13 @@ const ProductCatalogControl = () => {
             </div>
           </div>
 
-          {/* Cargador e Integración de Imagen */}
+          {/* 🎯 COMPONENTE UNIFICADO DE SELECCIÓN DE IMAGEN R2 */}
           <div className="form-group">
-            <label className="form-label">Imagen del Producto:</label>
-            <p className="image-notice-text">
-              💡 Recomendación: Utiliza imágenes en formato liviano <strong>.webp</strong> optimizadas para móvil.
-            </p>
-
-            <div className="image-upload-wrapper">
-              <label className="custom-file-upload">
-                <input type="file" accept="image/*" onChange={handleFileChange} />
-                📷 Tomar / Subir Foto Nueva
-              </label>
-
-              <button
-                type="button"
-                className="btn-open-gallery"
-                onClick={handleOpenGallery}
-              >
-                📂 Elegir de Galería R2
-              </button>
-            </div>
-
-            {/* Vista Previa de la Fotografía Seleccionada */}
-            {(imagePreview || formData.imageUrl) && (
-              <div className="image-preview-container">
-                <p>Imagen Seleccionada:</p>
-                <img
-                  src={imagePreview || formData.imageUrl}
-                  alt="Previsualización"
-                  className="preview-thumbnail"
-                  onError={(e) => (e.target.style.display = 'none')}
-                />
-              </div>
-            )}
+            <ImageSelectorR2
+              currentImage={imagePreview || formData.imageUrl}
+              onImageChange={handleGallerySelect}
+              onFileChange={handleFileChange}
+            />
           </div>
 
           {/* Botón de Envío */}
@@ -206,7 +174,7 @@ const ProductCatalogControl = () => {
         </form>
       </details>
 
-      {/* 🗑️ TARJETA 2: LISTA DE PRODUCTOS Y ELIMINACIÓN (PLEGABLE / ENCOGIBLE) */}
+      {/* 🗑️ TARJETA 2: LISTA DE PRODUCTOS Y ELIMINACIÓN */}
       <details className="catalog-card-section admin-collapsible-card">
         <summary className="catalog-header collapsible-summary">
           <div className="summary-title-wrapper">
@@ -217,85 +185,66 @@ const ProductCatalogControl = () => {
         </summary>
 
         <div className="categories-delete-list">
-          {Object.keys(menuData?.cards || {}).map((catKey) => {
-            const products = menuData.cards[catKey] || [];
-            const catTitle = products[0]?.categoryTitle || `Categoría ${catKey}`;
+          {(() => {
+            // Extraemos y ordenamos las llaves según categoryOrder de Firestore
+            const sortedCategoryKeys = Object.keys(menuData?.cards || {}).sort((a, b) => {
+              const orderList = menuData?.categoryOrder || [];
+              const indexA = orderList.indexOf(a);
+              const indexB = orderList.indexOf(b);
 
-            return (
-              <details key={catKey} className="delete-category-accordion">
-                <summary className="accordion-summary">
-                  <span>📂 {catTitle} ({products.length} productos)</span>
-                </summary>
+              if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+              if (indexA !== -1) return -1;
+              if (indexB !== -1) return 1;
 
-                <div className="category-products-grid">
-                  {products.map((item) => (
-                    <div key={item.id} className="delete-product-card">
-                      <img
-                        src={item.image || './images/products/default.webp'}
-                        alt={item.productTitle}
-                        className="delete-card-img"
-                      />
-                      <div className="delete-card-info">
-                        <h4>{item.productTitle}</h4>
-                        <p className="delete-card-price">
-                          ${item.offerPrice || item.regularPrice || item.price}
-                        </p>
+              const numA = parseInt(a.replace(/\D/g, ''), 10) || 0;
+              const numB = parseInt(b.replace(/\D/g, ''), 10) || 0;
+              return numA - numB;
+            });
+
+            return sortedCategoryKeys.map((catKey) => {
+              const products = menuData?.cards?.[catKey] || [];
+              const catTitle = products[0]?.categoryTitle || `Categoría ${catKey}`;
+
+              return (
+                <details key={catKey} className="delete-category-accordion">
+                  <summary className="accordion-summary">
+                    <span>📂 {catTitle} ({products.length} productos)</span>
+                  </summary>
+
+                  <div className="category-products-grid">
+                    {products.map((item) => (
+                      <div key={item.id} className="delete-product-card">
+                        <img
+                          src={item.image || './images/products/default.webp'}
+                          alt={item.productTitle}
+                          className="delete-card-img"
+                        />
+                        <div className="delete-card-info">
+                          <h4>{item.productTitle}</h4>
+                          <p className="delete-card-price">
+                            ${item.offerPrice || item.regularPrice || item.price}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-delete-product"
+                          disabled={deletingId === item.id}
+                          onClick={() => handleDeleteProduct(catKey, item.id)}
+                        >
+                          {deletingId === item.id ? '⏳' : '🗑️ Eliminar'}
+                        </button>
                       </div>
-                      <button
-                        type="button"
-                        className="btn-delete-product"
-                        disabled={deletingId === item.id}
-                        onClick={() => handleDeleteProduct(catKey, item.id)}
-                      >
-                        {deletingId === item.id ? '⏳' : '🗑️ Eliminar'}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </details>
-            );
-          })}
+                    ))}
+                  </div>
+                </details>
+              );
+            });
+          })()}
         </div>
       </details>
-      
-      {/* COMPONENTE DE REORDENACIÓN DE CATEGORÍAS */}    
-      <CategoryOrderControl />      
 
-      {/* 🖼️ MODAL DE GALERÍA R2 */}
-      {isGalleryOpen && (
-        <div className="media-modal-overlay">
-          <div className="media-modal-content">
-            <div className="media-modal-header">
-              <h3>📂 Galería de Imágenes en Cloudflare R2</h3>
-              <button
-                type="button"
-                className="btn-close-modal"
-                onClick={() => setIsGalleryOpen(false)}
-              >
-                ✖
-              </button>
-            </div>
-
-            {isLoadingGallery ? (
-              <p className="loading-gallery-text">⏳ Cargando imágenes desde R2...</p>
-            ) : galleryImages.length === 0 ? (
-              <p className="loading-gallery-text">No hay imágenes en la carpeta /products de R2.</p>
-            ) : (
-              <div className="gallery-grid">
-                {galleryImages.map((imgUrl, index) => (
-                  <div
-                    key={index}
-                    className="gallery-item"
-                    onClick={() => handleSelectFromGallery(imgUrl)}
-                  >
-                    <img src={imgUrl} alt={`R2 ${index}`} />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* COMPONENTE DE REORDENACIÓN DE CATEGORÍAS */}
+      <CategoryOrderControl />
     </div>
   );
 };
