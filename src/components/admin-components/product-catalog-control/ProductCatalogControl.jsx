@@ -3,6 +3,7 @@ import { useProductCatalogLogic } from './useProductCatalogLogic';
 import { useMenu } from '../../../context/MenuContext';
 import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2';
 import CategoryOrderControl from './CategoryOrderControl';
+import Toast from '../../toast-components/Toast'; // 👈 Importamos el nuevo componente
 import './productCatalogControl.css';
 // 1. Añade deleteField y arrayRemove a tus importaciones de firestore
 import { doc, updateDoc, arrayUnion, deleteField, arrayRemove } from 'firebase/firestore';
@@ -17,6 +18,7 @@ const ProductCatalogControl = () => {
     isSaving,
     deletingId,
     toast,
+    hideToast,
     // Manejadores del formulario y catálogo
     handleInputChange,
     handleFileChange,
@@ -28,12 +30,15 @@ const ProductCatalogControl = () => {
 
   return (
     <div className="product-catalog-container">
-      {/* Notificación Flotante (Toast) */}
-      {toast.show && (
-        <div className={`admin-toast ${toast.type}`}>
-          {toast.type === 'success' ? '✅' : '⚠️'} {toast.message}
-        </div>
-      )}
+      {/* 🎯 Componente Toast Independiente */}
+      <Toast         
+        show={toast.show} 
+        type={toast.type} 
+        message={toast.message} 
+        duration={3000}          // 👈 Duración en milisegundos (3 segundos)
+        onClose={hideToast}      // 👈 Oculta el toast automáticamente cuando cumple la duración
+      /> 
+     
 
       {/* ➕ TARJETA 1: FORMULARIO DE CREACIÓN (PLEGABLE / ENCOGIBLE) */}
       <details className="catalog-card-section admin-collapsible-card">
@@ -214,17 +219,17 @@ const ProductCatalogControl = () => {
                     <span>📂 {catTitle} ({products.length} productos)</span>
                   </summary>
 
-         {/* 🔴 NUEVO: Botón para eliminar la categoría completa */}
-                <div className="category-delete-header" style={{ padding: '10px', borderBottom: '1px solid #333', marginBottom: '15px', display: 'flex', justifyContent: 'flex-end' }}>
-                  <button
-                    type="button"
-                    className="btn-delete-product"
-                    style={{ backgroundColor: '#dc3545', color: 'white', width: 'auto', padding: '8px 6px' }}
-                    onClick={() => handleDeleteCategory(catKey, catTitle)}
-                  >
-                    ⚠️ Eliminar Categoría
-                  </button>
-                </div>
+                  {/* 🔴 NUEVO: Botón para eliminar la categoría completa */}
+                  <div className="category-delete-header" style={{ padding: '10px', borderBottom: '1px solid #333', marginBottom: '15px', display: 'flex', justifyContent: 'flex-end' }}>
+                    <button
+                      type="button"
+                      className="btn-delete-product"
+                      style={{ backgroundColor: '#dc3545', color: 'white', width: 'auto', padding: '8px 6px' }}
+                      onClick={() => handleDeleteCategory(catKey, catTitle)}
+                    >
+                      ⚠️ Eliminar Categoría
+                    </button>
+                  </div>
 
                   <div className="category-products-grid">
                     {products.map((item) => (

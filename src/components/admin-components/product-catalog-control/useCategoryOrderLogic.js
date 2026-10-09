@@ -25,10 +25,22 @@ export const useCategoryOrderLogic = () => {
     }
   }, [menuData]);
 
+  
+/**
+   * Dispara el Toast enviando el tipo y mensaje al componente visual
+   */
   const showToast = (type, message) => {
-    setToast({ show: true, type, message });
-    setTimeout(() => setToast({ show: false, type: '', message: '' }), 4000);
-  };
+  setToast({ show: true, type, message });
+};
+
+  /**
+   * Oculta el Toast
+   */
+const hideToast = () => {
+  setToast((prev) => ({ ...prev, show: false }));
+};
+
+
 
   // Mueve una categoría hacia arriba (🔼) o hacia abajo (🔽)
   const moveCategory = (index, direction) => {
@@ -66,7 +78,8 @@ export const useCategoryOrderLogic = () => {
     orderedKeys,
     menuData,
     isSaving,
-    toast,
+    toast,    
+    hideToast,
     moveCategory,
     handleSaveOrder
   };

@@ -4,6 +4,7 @@
 import React from 'react';
 import { useCategoryOrderLogic } from './useCategoryOrderLogic';
 import './categoryOrderControl.css';
+import Toast from '../../toast-components/Toast';
 
 const CategoryOrderControl = () => {
   const {
@@ -11,12 +12,21 @@ const CategoryOrderControl = () => {
     menuData,
     isSaving,
     toast,
+    hideToast,
     moveCategory,
     handleSaveOrder
   } = useCategoryOrderLogic();
 
   return (
     <details className="catalog-card-section admin-collapsible-card">
+      {/* 🎯 Componente Toast Independiente */}
+            <Toast         
+              show={toast.show} 
+              type={toast.type} 
+              message={toast.message} 
+              duration={3000}          // 👈 Duración en milisegundos (3 segundos)
+              onClose={hideToast}      // 👈 Oculta el toast automáticamente cuando cumple la duración
+            /> 
       <summary className="catalog-header collapsible-summary">
         <div className="summary-title-wrapper">
           <h2>↕️ Reordenar Secuencia de Categorías</h2>

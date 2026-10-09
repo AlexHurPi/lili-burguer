@@ -430,49 +430,6 @@ details.admin-collapsible-card[open] .categories-delete-list {
 .btn-delete-product:hover:not(:disabled) {
   background-color: #c82333;
 }
-/** ==========================================================================
-**              6. TOAST / NOTIFICACIÓN FLOTANTE (CATÁLOGO)
-**   ========================================================================== */
-
-.admin-toast {
-  position: fixed;
-  bottom: calc(40px + env(safe-area-inset-bottom, 0px)); /* Flota abajo respetando el borde de iOS */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #1e293b; /* Fondo oscuro elegante */
-  color: #ffffff;
-  padding: 12px 24px;
-  border-radius: 30px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  font-size: 0.9rem;
-  font-weight: 600;
-  z-index: 9999; /* Garantiza que siempre esté por encima de todo */
-  white-space: nowrap;
-  animation: slideUpToast 0.3s ease-out forwards;
-  pointer-events: none; /* Evita que bloquee los clics del usuario detrás del aviso */
-}
-
-/* Variantes de color según el estado */
-.admin-toast.success {
-  border: 1.5px solid #22c55e; /* Borde verde para éxito */
-}
-
-.admin-toast.error {
-  border: 1.5px solid #ef4444; /* Borde rojo para error */
-}
-
-/* Animación de entrada fluida */
-@keyframes slideUpToast {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
 /**=======================================================================
 **              7. ADAPTABILIDAD RESPONSIVE MÓVIL
 **========================================================================== */
