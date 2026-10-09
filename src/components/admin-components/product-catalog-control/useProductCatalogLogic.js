@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../../../services/firebase';
 import { useMenu } from '../../../context/MenuContext';
 import { listR2Images, uploadImageToR2 } from '../../../services/r2Service';
+import { doc, updateDoc, arrayUnion, deleteField, arrayRemove } from 'firebase/firestore';
 
 export const useProductCatalogLogic = () => {
   const { menuData } = useMenu();
@@ -82,20 +82,20 @@ export const useProductCatalogLogic = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
+  const handleFileChange = (file, tempPreview) => {
+    // 1. Verificamos que el componente nos haya enviado un archivo
     if (!file) return;
 
+    // 2. Validamos el tipo
     if (!file.type.startsWith('image/')) {
       showToast('error', 'Por favor selecciona un archivo de imagen válido (.jpg, .png, .webp).');
-      e.target.value = '';
       return;
     }
 
+    // 3. Sincronizamos los estados correctamente
     setImageFile(file);
-    const previewUrl = URL.createObjectURL(file);
-    setImagePreview(previewUrl);
-    setFormData((prev) => ({ ...prev, imageUrl: previewUrl }));
+    setImagePreview(tempPreview);
+    setFormData((prev) => ({ ...prev, imageUrl: tempPreview }));
   };
 
   const handleOpenGallery = async () => {
@@ -114,7 +114,7 @@ export const useProductCatalogLogic = () => {
   const handleSelectFromGallery = (url) => {
     setFormData((prev) => ({ ...prev, imageUrl: url }));
     setImagePreview(url);
-    setImageFile(null);
+    setImageFile(null); // Al seleccionar de R2, cancelamos la subida de archivo local
     setIsGalleryOpen(false);
   };
 
@@ -150,7 +150,7 @@ export const useProductCatalogLogic = () => {
       const currentCards = menuData?.cards || {};
 
       if (formData.isNewCategory) {
-        // Generar una clave única buscando el número más alto existente
+        // Generar una clave única buscando el número más alto existente (ej: card16)
         const existingNumbers = Object.keys(currentCards).map((k) =>
           parseInt(k.replace(/\D/g, ''), 10) || 0
         );
@@ -193,7 +193,7 @@ export const useProductCatalogLogic = () => {
         [`cards.${targetCatKey}`]: updatedCategoryArray
       };
 
-      // Si es una categoría nueva, se agrega su clave al arreglo global categoryOrder
+      // Si es una categoría nueva, agregamos la clave a la secuencia global categoryOrder
       if (formData.isNewCategory) {
         updateData.categoryOrder = arrayUnion(targetCatKey);
       }
@@ -249,7 +249,27 @@ export const useProductCatalogLogic = () => {
       setDeletingId(null);
     }
   };
+// Nueva función para eliminar una categoría entera
+        const handleDeleteCategory = async (catKey, catTitle) => {
+      if (!window.confirm(`⚠️ PELIGRO: ¿Estás seguro de que deseas eliminar TODA la categoría "${catTitle}"...?`)) {
+        return;
+      }
 
+      try {
+        const docRef = doc(db, 'menu', 'spanish');
+        
+        // 👇 REVISA ESTA PARTE EXACTAMENTE:
+        await updateDoc(docRef, {
+          [`cards.${catKey}`]: deleteField(),
+          categoryOrder: arrayRemove(catKey)
+        });
+
+        showToast('success', `Categoría "${catTitle}" eliminada correctamente.`);
+      } catch (error) {
+        console.error('Error al eliminar la categoría:', error);
+        showToast('error', 'No se pudo eliminar la categoría.');
+      }
+    };
   return {
     formData,
     categoriesList,
@@ -267,6 +287,7 @@ export const useProductCatalogLogic = () => {
     isLoadingGallery,
     setIsGalleryOpen,
     handleOpenGallery,
-    handleSelectFromGallery
+    handleSelectFromGallery,
+    handleDeleteCategory
   };
 };

@@ -4,6 +4,8 @@ import { useMenu } from '../../../context/MenuContext';
 import { ImageSelectorR2 } from '../image-selector/ImageSelectorR2';
 import CategoryOrderControl from './CategoryOrderControl';
 import './productCatalogControl.css';
+// 1. Añade deleteField y arrayRemove a tus importaciones de firestore
+import { doc, updateDoc, arrayUnion, deleteField, arrayRemove } from 'firebase/firestore';
 
 const ProductCatalogControl = () => {
   const { menuData } = useMenu();
@@ -18,9 +20,10 @@ const ProductCatalogControl = () => {
     // Manejadores del formulario y catálogo
     handleInputChange,
     handleFileChange,
-    handleGallerySelect,
+    handleSelectFromGallery,
     handleCreateProduct,
-    handleDeleteProduct
+    handleDeleteProduct,
+    handleDeleteCategory,
   } = useProductCatalogLogic();
 
   return (
@@ -158,7 +161,7 @@ const ProductCatalogControl = () => {
           <div className="form-group">
             <ImageSelectorR2
               currentImage={imagePreview || formData.imageUrl}
-              onImageChange={handleGallerySelect}
+              onImageChange={handleSelectFromGallery}
               onFileChange={handleFileChange}
             />
           </div>
@@ -211,6 +214,18 @@ const ProductCatalogControl = () => {
                     <span>📂 {catTitle} ({products.length} productos)</span>
                   </summary>
 
+         {/* 🔴 NUEVO: Botón para eliminar la categoría completa */}
+                <div className="category-delete-header" style={{ padding: '10px', borderBottom: '1px solid #333', marginBottom: '15px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <button
+                    type="button"
+                    className="btn-delete-product"
+                    style={{ backgroundColor: '#dc3545', color: 'white', width: 'auto', padding: '8px 6px' }}
+                    onClick={() => handleDeleteCategory(catKey, catTitle)}
+                  >
+                    ⚠️ Eliminar Categoría
+                  </button>
+                </div>
+
                   <div className="category-products-grid">
                     {products.map((item) => (
                       <div key={item.id} className="delete-product-card">
@@ -231,7 +246,7 @@ const ProductCatalogControl = () => {
                           disabled={deletingId === item.id}
                           onClick={() => handleDeleteProduct(catKey, item.id)}
                         >
-                          {deletingId === item.id ? '⏳' : '🗑️ Eliminar'}
+                          {deletingId === item.id ? '⏳' : '🗑️ Eliminar producto'}
                         </button>
                       </div>
                     ))}
