@@ -18,7 +18,7 @@ export default defineConfig({
         background_color: '#1a2225',
         display: 'standalone',
         // 👇 Se quita /lili-burguer/ de la ruta de inicio
-        start_url: '/#/admin', 
+        start_url: './', 
         icons: [
           {
             src: 'icono-192.png',
