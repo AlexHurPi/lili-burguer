@@ -11,14 +11,14 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icono-192.png', 'icono-512.png', 'imagen-compartir.jpg'],
       manifest: {
-        name: 'Lili Admin',
-        short_name: 'Lili Admin',
-        description: 'Panel de administración de Lili Burguer',
+        name: 'Lili Hamburger',
+        short_name: 'Lili Ham',
+        description: 'Menú digital de Lili Hamburger',
         theme_color: '#ff4e3e',
         background_color: '#1a2225',
         display: 'standalone',
-        // 👇 Se quita /lili-burguer/ de la ruta de inicio
-        start_url: '/#/admin', 
+        //Se quita /lili-burguer/ de la ruta de inicio
+        start_url: './', 
         icons: [
           {
             src: 'icono-192.png',
