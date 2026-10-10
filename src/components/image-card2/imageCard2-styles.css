@@ -13,25 +13,24 @@
 
 /* Cabecera de Categoría */
 .category-header {
-  background: var(--background-cool, #1a2225);  
-  padding: 12px 15px;
+  /*background: var(--background-cool, #1a2225);  */
+  /*padding: 12px 15px;*/
   border-radius: 8px;
-  border: 1px solid #f3f1f1;
-  text-align: center;
+  /*border: 1px solid #f3f1f1;*/
+  text-align: left;
   margin: 0.5em;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  /*box-shadow: 0 4px 6px rgba(0,0,0,0.3);*/
 }
 
 .category-header h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: 800; /* Mayor grosor como en el diseño de referencia */
   font-family: jost-bold, sans-serif;
   letter-spacing: 1px;
-  text-transform: uppercase; /* Fuerza las mayúsculas */
+  /*text-transform: uppercase; /* Fuerza las mayúsculas */
   color: white;
 }
-
 
 /**=======================================================================
 **                      CONTENEDOR DE PRODUCTOS Y TARJETAS
@@ -39,15 +38,15 @@
 
 /* Contenedor de la Tarjeta Oscura */
 .products-container {
-  background-color: #1a2225;
-  border: 1px solid #f3f1f1; 
+  /*background: var(--background-dark2);*/
+  /*border: 1px solid #f3f1f1; */
   border-radius: 12px;
   margin: 0.7em;
   padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 20px; /* Espacio uniforme entre cada producto */
-  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  /*box-shadow: 0 8px 15px rgba(0,0,0,0.5);*/
   box-sizing: border-box;
 }
 
@@ -55,11 +54,15 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #2a353a;  
+  border-radius: 1em;
+  padding: 1em 1em;
+  /*border-bottom: 1px solid #2a353a;  */
   width: 100%;  
   padding-inline: 0.3em;  
   /*overflow: hidden; /* Se comenta porque oculta los avisos de ofertas en el diseño */
   box-sizing: border-box;
+  background-color: #1F1A17;
+  
 }
 
 /* Quitar el borde al último elemento */
@@ -80,7 +83,7 @@
 .product-image {
   flex: 0 0 110px; /* Tamaño ideal para dar espacio a los controles en móviles */
   height: 110px;
-  background-color: #d1e2f3; /* Fondo azul claro del diseño */
+  /*background-color: #d1e2f3; /* Fondo azul claro del diseño */
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -180,13 +183,14 @@
   /*padding: 0.3em 0.8em;
   background-color: #ffffff;
   border-radius: 5em;*/
+  
 }
 
-.qty-btn {
+.qty-button {
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +198,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.1s ease;
-  padding: 0;
+  padding: 0;   
 }
 
 .qty-btn:active {
@@ -207,24 +211,25 @@
 }
 
 /* Estilos individuales de los botones */
-.qty-btn.minus {
-  background-color: #d1d5db; /* Gris claro */
-  color: #1a2225;
-  font-family: jost, sans-serif;
+.qty-button.minus {
+  background-color: #1F1A17; /* Gris claro */  
+  color: #92989b;
+  font-family: jost, sans-serif; 
+  border: 1px solid #3e3f41;   
 }
 
-.qty-btn.plus {
+.qty-button.plus {
   background-color: #ff4e3e; /* Rojo coral */
-  color: white;
-  font-family: jost, sans-serif;
+  color: #1F1A17;
+  font-family: jost, sans-serif;  
 }
 
 .qty-mainPAge-number {
-  color: #ff4e3e;
+  color: #ffffff;
   font-size: 1.2rem;
   font-weight: 800;
   min-width: 24px;
-  text-align: center;
+  text-align: center;  
 }
 
 
@@ -280,7 +285,7 @@
 
 /* Resaltado de la tarjeta cuando la promoción está activa */
 .product-card-promo {
-  border: 1px solid #ff4e3e !important;
+  /*border: 1px solid #ff4e3e !important;*/
   border-radius: 0.5em;
   position: relative;
   padding-top: 1.5em;

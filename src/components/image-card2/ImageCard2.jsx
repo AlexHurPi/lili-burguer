@@ -121,7 +121,7 @@ const ProductItem = ({ product }) => {
 
         <div className="custom-qty-controls">
           <button
-            className="qty-btn minus"
+            className="qty-button minus"
             onClick={handleDecrement}
             disabled={!isStock || cantidad === 0 || isAdded}
           >
@@ -129,7 +129,7 @@ const ProductItem = ({ product }) => {
           </button>
           <span className="qty-mainPAge-number">{cantidad}</span>
           <button
-            className="qty-btn plus"
+            className="qty-button plus"
             onClick={handleIncrement}
             disabled={!isStock || isAdded}
           >
@@ -184,7 +184,8 @@ const ImageCard2 = ({ dataKey }) => {
     <div className="imageCard2-mainContainer">
       {categoryTitle && (
         <div className="category-header">
-          <h3>{categoryTitle.toUpperCase()}</h3>
+          {/*<h3>{categoryTitle.toUpperCase()}</h3>*/}
+          <h3>{categoryTitle}</h3>
         </div>
       )}
       <div className="products-container">

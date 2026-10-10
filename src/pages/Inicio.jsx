@@ -10,6 +10,7 @@ import ImageCard2 from '../components/image-card2/ImageCard2';
 import ImageCarouselManual from '../components/imageCarousel-components/ImageCarouselManual';
 import { WhatsappButton } from "../components/whatsapp-components/WhatsappButton";
 import { Kart } from '../components/kart-components/Kart';
+import { Kart2 } from '../components/kart-components2/Kart2';
 import { Footer } from '../components/footer-components/Footer';
 import PromoCarousel from '../components/promoCarousel/PromoCarousel';
 import StoreStatusBanner from '../components/storeStatusBanner-components/StoreStatusBanner';
@@ -60,7 +61,7 @@ const Inicio = () => {
       ))}
       
       <WhatsappButton />
-      <Kart />
+      <Kart2 />
       
 
       <Footer dataKey="footer" />
