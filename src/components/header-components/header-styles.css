@@ -1,25 +1,24 @@
 /* header-styles.css */
-.header {
-  display: flex;
+.header {  
+  display: flex;  
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);   
 }
-
-.header-mainContainer {
-  display: flex;
+.header-mainContainer {  
+  display: flex;  
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   width: 100%;
-  min-height: 180px;
   margin: 0 auto;
   gap: 1rem;
-  background: linear-gradient(180deg, rgba(20, 16, 14, 0.70), rgba(17, 10, 9, 0.82));
-  padding: 1rem 1rem 1.2rem;
-  position: relative;
+  flex-wrap: nowrap;/* Evita que los elementos se envuelvan en pantallas pequeñas */
+  background-color: rgba(5, 5, 32, 0.575);
+  padding: 1rem 1rem;
+  
 }
 
 .header-textContainer {
@@ -27,48 +26,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(17, 17, 17, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  padding: 0.8rem 1.1rem;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  margin-left: 0.5rem;
+  background-color: rgba(5, 5, 32, 0.575);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
 }
-
 .header-title {
-  font-size: clamp(1.55rem, 3vw, 2.4rem);
-  font-weight: 800;
-  font-family: jost-bold, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;  
+  font-family: jost-bold;
   color: var(--header-title);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.1;
 }
-
 .header-subtitle {
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  font-family: jost, sans-serif;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-top: 0.2rem;
+  font-size: 1rem; 
+  font-family: jost;  
+  color: var(--header-title);
 }
-
-.header-carritoContainer {
+.header-carritoContainer{  
   background-color: aliceblue;
   padding: 0.3rem 0.3rem;
   border-radius: 50%;
 }
-
-.languageSelector-container {
+.languageSelector-container{
   display: flex;
   position: absolute;
-  right: 12px;
-  top: 12px;
+  right: 5px;
+  top: 5px;
   z-index: 20;
 }
-
 .carritoCounter {
   position: absolute;
   top: 0px;
@@ -86,25 +71,10 @@
 
 @media (max-width: 600px) {
   .header-mainContainer {
-    min-height: 150px;
-    justify-content: center;
-    padding-top: 1.2rem;
+    padding-top: 1rem;
+    justify-content: start;
   }
-
-  .header-textContainer {
-    padding: 0.7rem 0.9rem;
-    max-width: 78%;
-  }
-
-  .header-title {
-    letter-spacing: 0.04em;
-  }
-
-  .header-subtitle {
-    letter-spacing: 0.08em;
-  }
-
-  .header-carritoContainer {
+  .header-carritoContainer{
     margin-top: 2rem;
     margin-left: 0rem;
   }
