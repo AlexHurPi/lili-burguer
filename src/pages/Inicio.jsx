@@ -60,7 +60,7 @@ const Inicio = () => {
         </div>
       ))}
       
-      <WhatsappButton />
+      {/*<WhatsappButton />*/}
       <Kart2 />
       
 

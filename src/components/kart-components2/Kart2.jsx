@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartContext.jsx';
 
 export const Kart2 = () => {  
   const carritoImage = './images/carrito-compras.webp';  
-  const { carrito } = useCart();
+  const { carrito, totalPagar } = useCart();
   
   // Calculamos el total de ítems acumulados en el carrito
   const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
@@ -29,17 +29,24 @@ export const Kart2 = () => {
   }, [totalItems]);
 
   return (
-    <div className={`kart-container ${isBouncing ? 'kart-bounce-active' : ''}`}>
-      <div className={`kartCounter ${isBouncing ? 'counter-pop' : ''}`}>
-        <p>{totalItems}</p>
-      </div>
-
-      <Link to="/Carrito">         
-        <img 
-          src={carritoImage} 
-          alt='imagen-carrito'                    
-        />
-      </Link>
-    </div>
+    <Link to="/Carrito">   
+        {totalItems > 0 && (
+            <div className={`kart-container ${isBouncing ? 'kart-bounce-active' : ''}`}>
+              {/*<div className={`kartCounter ${isBouncing ? 'counter-pop' : ''}`}>
+                <p>{totalItems}</p>
+              </div>*/}
+                      
+              <img 
+                src={carritoImage} 
+                alt='imagen-carrito'                    
+              />
+              <p className='totalPagar'>
+                <strong>
+                  {totalItems} {totalItems === 1 ? 'Producto' : 'Productos'} ${totalPagar.toLocaleString('es-CO')}
+                </strong>
+              </p>
+            </div>
+          )}
+     </Link>
   );
 };
