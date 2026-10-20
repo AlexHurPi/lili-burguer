@@ -298,3 +298,20 @@
   background-color: #e03c2d;
 }
 
+n {
+  background-color: #2e7d32;
+}
+
+.btn-checkout.btn-open:hover {
+  background-color: #236628;
+}
+
+/* Estado: CERRADO (Mantiene el color actual rojo coral) */
+.btn-checkout.btn-closed {
+  background-color: #ff4e3e;
+}
+
+.btn-checkout.btn-closed:hover {
+  background-color: #e03c2d;
+}
+

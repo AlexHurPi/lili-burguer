@@ -30,11 +30,14 @@ export const BackTo = () => {
   return (
     <div className="backTo-container">         
       <Link to={'/'} onClick={handleBackClick}>                 
-        <img 
+        {/*<img 
           src={volver} 
           alt='home-image'
           style={{ height: '40px' }} 
-        />
+        />*/}
+        <div>
+          <h1>‹</h1>
+        </div>
       </Link>
     </div>
   );

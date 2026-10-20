@@ -13,6 +13,7 @@
   width: 100%;
   /*align-items: center;*/
   gap: 1px;
+  margin-bottom: 2em;
 }
 .company-info-container {  
   display: flex;

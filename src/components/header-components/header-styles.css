@@ -39,7 +39,7 @@
 }
 .header-subtitle {
   font-size: 1rem; 
-  font-family: jost;  
+  font-family: jost-ExtraLight;  
   color: var(--header-title);
 }
 .header-carritoContainer{  

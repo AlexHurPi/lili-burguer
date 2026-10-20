@@ -1,11 +1,16 @@
 .backTo-container{ 
-    position: fixed;
+    /*position: fixed;
     z-index: 1000;
     top: 7em;    
-    right: 1em;
+    right: 1em;*/
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white; 
+    font-size: 1.4rem;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
 }
 .backTo-container img{
     display: flex;

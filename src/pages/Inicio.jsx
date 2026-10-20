@@ -16,6 +16,7 @@ import PromoCarousel from '../components/promoCarousel/PromoCarousel';
 import StoreStatusBanner from '../components/storeStatusBanner-components/StoreStatusBanner';
 import { useMenu } from '../context/MenuContext';
 import { migrarMenuAFirestore } from '../helpers/migrador';
+import Header from '../components/header-components/Header';
 
 
 const Inicio = () => {
@@ -47,6 +48,7 @@ const Inicio = () => {
 
   return (
     <div className="inicio-mainContainer">
+      <Header/>
       {/* Banner del Estado de la Tienda */}
       <StoreStatusBanner />
 

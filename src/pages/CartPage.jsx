@@ -69,7 +69,7 @@ export const CartPage = () => {
     <div className="kart-mainContainer">
       <div className="kart-header">
         <BackTo />        
-        <h2>Tu Carrito ({totalItems})</h2>
+        <h2>Tu Pedido ({totalItems})</h2>
       </div>
 
       {!isOpen && (

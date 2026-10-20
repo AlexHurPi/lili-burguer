@@ -23,7 +23,7 @@ function App() {
     <>
     <MenuProvider>
       {/* 👈 Renderizado condicional: El Header público NO se muestra en /admin */}
-      {!isAdminRoute && <Header/>}
+      
       
       <ScrollToTop />      
       <CartProvider>
