@@ -15,6 +15,7 @@
 .kart-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px;
   background-color: #1a2225;
   border-bottom: 1px solid #2a353a;

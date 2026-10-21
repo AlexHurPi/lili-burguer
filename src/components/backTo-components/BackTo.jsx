@@ -28,14 +28,15 @@ export const BackTo = () => {
   };   
 
   return (
-    <div className="backTo-container">         
-      <Link to={'/'} onClick={handleBackClick}>                 
-        <img 
-          src={volver} 
-          alt='home-image'
-          style={{ height: '30px', width: '20px' }} 
-        />
-      </Link>
-    </div>
+    <Link to={'/'} onClick={handleBackClick}>
+      <div className="backTo-container">         
+                        
+          <img 
+            src={volver} 
+            alt='home-image'           
+          />
+        
+      </div>
+    </Link>
   );
 };
