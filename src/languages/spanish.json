@@ -37,8 +37,8 @@
       { "day": 6, "dayName": "Sábado", "isOpen": true, "openTime": "16:00", "closeTime": "01:00" }
     ],
     "messages": {
-      "openBanner": "🟢 ¡Estamos Abiertos! Toma tu pedido ahora",
-      "closedBanner": "🔴 Tienda Cerrada • Abrimos a las 4:00 PM. ¡Puedes programar tu pedido!",
+      "openBanner": "¡Estamos Abiertos! Toma tu pedido ahora",
+      "closedBanner": "Tienda Cerrada • Abrimos a las 4:00 PM. ¡Puedes programar tu pedido!",
       "closedCartNotice": "En este momento la cocina está cerrada. Tu pedido se registrará como PROGRAMADO para ser despachado cuando abramos.",
       "scheduledOrderHeader": "📌 *PEDIDO PROGRAMADO* (Para entregar en el próximo horario de atención)",
       "whatsappHeader": "📋 *¡Hola! Quiero hacer el siguiente pedido:*",
