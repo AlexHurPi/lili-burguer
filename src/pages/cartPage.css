@@ -21,13 +21,15 @@
   gap: 15px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 10;  
 }
 
 .kart-header h2 {
   margin: 0;
   font-size: 1.3rem;
   color: #ff4e3e; /* Rojo coral[cite: 1] */
+  align-items: center;
+  
 }
 
 /* Carrito Vacío */

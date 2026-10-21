@@ -63,8 +63,7 @@ const Inicio = () => {
       ))}
       
       {/*<WhatsappButton />*/}
-      <Kart2 />
-      
+      <Kart2 />      
 
       <Footer dataKey="footer" />
     </div>

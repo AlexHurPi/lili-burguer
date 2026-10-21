@@ -18,7 +18,7 @@ import './backTo-styles.css';
 import { Link, useNavigate } from 'react-router-dom'; 
 
 export const BackTo = () => {
-  const volver = './images/Icono-volver6.webp'; // Ruta de la imagen
+  const volver = './images/back-white.webp'; // Ruta de la imagen
   const navigate = useNavigate(); // Inicializamos el hook navigate
 
   // Función simplificada: siempre ejecuta el retroceso en el historial
@@ -30,14 +30,11 @@ export const BackTo = () => {
   return (
     <div className="backTo-container">         
       <Link to={'/'} onClick={handleBackClick}>                 
-        {/*<img 
+        <img 
           src={volver} 
           alt='home-image'
-          style={{ height: '40px' }} 
-        />*/}
-        <div>
-          <h1>‹</h1>
-        </div>
+          style={{ height: '30px', width: '20px' }} 
+        />
       </Link>
     </div>
   );
