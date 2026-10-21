@@ -164,7 +164,7 @@ const PromoCarousel = () => {
     <section className="promo-carousel-container">
       {/* Encabezado / Divisor temático */}
       <div className="promo-header-divider">
-        <h3>🔥 PROMOCIONES ESPECIALES 🔥</h3>
+        <h3>🔥 Combos y Promociones 🔥</h3>
       </div>
 
       <div className="promo-carousel-wrapper">

@@ -48,14 +48,16 @@ const Inicio = () => {
 
   return (
     <div className="inicio-mainContainer">
+      {/*HEADER*/}
       <Header/>
-      {/* Banner del Estado de la Tienda */}
+
+      {/* BANNER DE ESTADO DE TIENDA */}
       <StoreStatusBanner />
 
       {/* 🔥 CARRUSEL DE PROMOCIONES VIGENTES 🔥 */}
       <PromoCarousel totalCards={categoryKeys.length || 15} />
 
-      {/* Iteración ordenada numéricamente */}
+      {/* TARJETA DE PRODUCTO: Iteración ordenada numéricamente */}
       {categoryKeys.map((key) => (
         <div key={key} className="card">
           <ImageCard2 dataKey={`cards.${key}`} />          
@@ -63,8 +65,11 @@ const Inicio = () => {
       ))}
       
       {/*<WhatsappButton />*/}
+      
+      {/*BOTON DE CARRITO: redirige a la pantalla de carrito*/}
       <Kart2 />      
 
+      {/*FOOTER: información de contacto y redes sociales*/}
       <Footer dataKey="footer" />
     </div>
   );

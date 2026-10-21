@@ -16,13 +16,15 @@
 .promo-header-divider {
   position: relative; /* Posiciona la luz dentro del contenedor */
   overflow: hidden;   /* Mantiene el reflejo dentro de los bordes */
-  background: linear-gradient(135deg, #FFD700 0%, #FF4E50 50%, #D81159 100%);
-  color: #ffffff;
+  /*background: linear-gradient(135deg, #FFD700 0%, #FF4E50 50%, #D81159 100%);*/  
+  background-color: #FFB020;
+  /*color: #ffffff;*/
   border: 1px solid rgba(255, 215, 0, 0.5);
-  padding: 10px 5px;
-  border-radius: 8px;
+  padding: 5px;
+  border-radius: 12px;
   text-align: center;
-  margin: 0.5rem;
+  margin-block: 0.3rem;
+  margin-inline: 0.5rem;
   box-shadow: 0 4px 12px rgba(255, 78, 80, 0.4);
 }
 
@@ -59,11 +61,12 @@
 
 .promo-header-divider h3 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  font-family: jost-bold, sans-serif;
+  font-family: jost-ExtraLight, sans-serif;
+  color: #000000;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 
