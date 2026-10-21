@@ -61,8 +61,7 @@
   padding-inline: 0.3em;  
   /*overflow: hidden; /* Se comenta porque oculta los avisos de ofertas en el diseño */
   box-sizing: border-box;
-  background-color: #1F1A17;
-  
+  background-color: #2b2420;  
 }
 
 /* Quitar el borde al último elemento */
