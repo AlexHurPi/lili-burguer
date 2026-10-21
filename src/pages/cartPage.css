@@ -4,7 +4,7 @@
   max-width: 500px; /* Tamaño optimizado para móvil[cite: 1] */
   margin: 0 auto;
   font-family: 'Jost', sans-serif;
-  background-color: #1a2225; /* Fondo oscuro de tu diseño[cite: 1] */
+  background: var(--background-dark3); /* Fondo oscuro de tu diseño[cite: 1] */
   min-height: 100vh;
   color: white;
   padding-bottom: 120px; /* Espacio para que el footer fijo no tape el último elemento */
@@ -59,7 +59,7 @@
 
 .kart-item {
   display: flex;
-  background-color: #1a2225;
+  background-color: #2b2420;
   border: 1px solid #2a353a;
   border-radius: 12px;
   padding: 12px;
@@ -71,7 +71,7 @@
 .kart-item-image {
   flex: 0 0 80px;
   height: 80px;
-  background-color: #d1e2f3; /* Fondo azul claro como tu diseño[cite: 1] */
+  /*background-color: #d1e2f3; /* Fondo azul claro como tu diseño[cite: 1] */
   border-radius: 8px;
   overflow: hidden;
   display: flex;
@@ -115,7 +115,7 @@
 
 .kart-item-price {
   margin: 0;
-  color: #ff4e3e;
+  color: #FFB020;
   font-weight: bold;
   font-size: 1.1rem;
 }
@@ -184,7 +184,7 @@
   max-width: 500px;
   background-color: #1a2225;
   border-top: 2px solid #ff4e3e;
-  padding: 5px 20px 10px 20px;
+  padding: 12px 20px 16px 20px;
   box-shadow: 0 -4px 15px rgba(0,0,0,0.6);
   box-sizing: border-box;
   display: flex;
@@ -203,7 +203,7 @@
 }
 
 .kart-total-price {
-  color: #ff4e3e;
+  color: #FFB020;
   font-size: 1.5rem;
 }
 
@@ -212,14 +212,21 @@
   color: white;
   border: none;
   padding: 15px;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
   font-weight: bold;
   width: 100%;
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-checkout:active {
+  transform: scale(0.98);
 }
 
 .btn-checkout:hover {
@@ -283,38 +290,228 @@
 /**================================================================*/
 /** Estilos para el botón de hacer pedido / programar por whatsapp */
 /**================================================================*/
-/* Estado: ABIERTO (Verde suave agradable) */
+/* Estado: ABIERTO (Verde oficial vibrante de WhatsApp) */
 .btn-checkout.btn-open {
-  background-color: #2e7d32;
+  background-color: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 
 .btn-checkout.btn-open:hover {
-  background-color: #236628;
+  background-color: #20bd5a;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
 }
 
-/* Estado: CERRADO (Mantiene el color actual rojo coral) */
+/* Estado: CERRADO (Rojo coral para alertar horario) */
 .btn-checkout.btn-closed {
   background-color: #ff4e3e;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 78, 62, 0.35);
 }
 
 .btn-checkout.btn-closed:hover {
   background-color: #e03c2d;
+  box-shadow: 0 6px 18px rgba(255, 78, 62, 0.45);
 }
 
-n {
-  background-color: #2e7d32;
+/**================================================================*/
+/** Selector de tipo de entrega (Domicilio / Recoger) */
+/**================================================================*/
+.delivery-selector {
+  margin-top: 5px;
 }
 
-.btn-checkout.btn-open:hover {
-  background-color: #236628;
+.delivery-toggle {
+  display: flex;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #3d4a50;
 }
 
-/* Estado: CERRADO (Mantiene el color actual rojo coral) */
-.btn-checkout.btn-closed {
+.delivery-toggle-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  color: #8a99a0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 10px;
+}
+
+.delivery-toggle-btn.active {
   background-color: #ff4e3e;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 78, 62, 0.35);
 }
 
-.btn-checkout.btn-closed:hover {
-  background-color: #e03c2d;
+/**================================================================*/
+/** Formulario de entrega (Nombre, Dirección, Notas) */
+/**================================================================*/
+.delivery-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  animation: fadeSlideIn 0.25s ease-out;
 }
 
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delivery-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.delivery-label {
+  font-size: 0.82rem;
+  color: #a0adb4;
+  font-weight: 500;
+}
+
+.delivery-input {
+  width: 100%;
+  background-color: #1a2225;
+  border: 1px solid #3d4a50;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-family: 'Jost', sans-serif;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.delivery-input::placeholder {
+  color: #5a6a72;
+}
+
+.delivery-input:focus {
+  border-color: #ff4e3e;
+  box-shadow: 0 0 0 2px rgba(255, 78, 62, 0.15);
+}
+
+/**================================================================*/
+/** Selector de método de pago (Nequi / Efectivo) */
+/**================================================================*/
+.payment-selector {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-toggle {
+  display: flex;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #3d4a50;
+  gap: 4px;
+  padding: 3px;
+}
+
+.payment-toggle-btn {
+  flex: 1;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  color: #8a99a0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.payment-toggle-btn.active {
+  background-color: #ff4e3e;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 78, 62, 0.35);
+}
+
+.payment-cash-field {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeSlideIn 0.25s ease-out;
+}
+
+.payment-note {
+  margin: 2px 0 0 0;
+  font-size: 0.78rem;
+  color: #8da1ab;
+  font-style: italic;
+  line-height: 1.35;
+  animation: fadeSlideIn 0.2s ease-out;
+}
+
+/**================================================================*/
+/** Resumen del pedido (Subtotal, Domicilio, Total) */
+/**================================================================*/
+.order-summary {
+  margin-top: 8px;
+  padding: 14px 0;
+  border-top: 1px solid #2a353a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.92rem;
+  color: #b0bec5;
+}
+
+.summary-row.summary-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #3d4a50;
+}
+
+.summary-total-price {
+  color: #FFB020;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.summary-por-acordar {
+  color: #FFB020;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.delivery-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #6b8490;
+  font-style: italic;
+  line-height: 1.3;
+}
