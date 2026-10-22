@@ -148,15 +148,17 @@
   justify-content: space-between;
   align-items: center;  
   flex-wrap: wrap; /* Evita que los controles se desborden en móviles pequeños */ 
-  margin-top: 8px;
-  gap: 10px;
+  margin-top: 4px;
+  margin-bottom: 5px;
+  gap: 5px;
 }
 
 /* Contenedor de precios */
 .price-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 1px;
 }
 
 .product-price {
@@ -231,7 +233,6 @@
   text-align: center;  
 }
 
-
 /**=======================================================================
 **                       BOTÓN AGREGAR AL CARRITO
 **  ========================================================================== */
@@ -241,17 +242,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  margin: 0.8em auto;
-  width: 70%;
-  border: 0.13em solid #e9e4e3;
+  padding: 0.5em 0.3em;
+  margin: 0.5em auto;
+  width: 25%;
+  border: 0.1em solid #e9e4e3;
   color: #ff4e3e;  
-  border-radius: 0.8em;
+  border-radius: 0.8em;  
   font-size: 0.9rem;
-  font-family: jost-bold, sans-serif;
+  font-family: jost-ExtraLight, sans-serif;
   font-weight: bold;
   cursor: pointer;  
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;  
+}
+
+.btn-add-to-cart h2 {
+  font-size: 0.8rem;
+  color: #ff4e3e;
 }
 
 .btn-add-to-cart:hover:not(.btn-disabled) {
@@ -261,11 +267,12 @@
 
 /* Botón deshabilitado cuando no hay stock */
 .btn-add-to-cart.btn-disabled {
-  background-color: #2c3539;
-  color: #777777;
-  border: 1px solid #444444;
+  /*background-color: #2c3539;*/
+  /*color: #777777;*/
+  /*border: 1px solid #444444;*/
   cursor: not-allowed;
-  box-shadow: none;
+  /*box-shadow: none;*/
+  opacity: 0.5;
 }
 
 /* Estado activo del botón al agregar (Verde éxito) */

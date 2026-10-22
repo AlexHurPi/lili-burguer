@@ -90,7 +90,7 @@ const PromoCardItem = ({ product }) => {
               onClick={handleAddToCart}
               disabled={cantidad === 0}
             >
-              {isAdded ? '✅ ¡AGREGADO!' : '🛒 AGREGAR'}
+              {isAdded ? '✅ ¡Agregado!' : '🛒 Agregar'}
             </button>
           </div>
         </div>

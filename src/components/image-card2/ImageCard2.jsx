@@ -50,11 +50,13 @@ const ProductItem = ({ product }) => {
       : product.regularPrice;
 
   const handleIncrement = () => {
-    if (isStock) setCantidad(cantidad + 1);
+    if (isStock) setCantidad((currentCantidad) => currentCantidad + 1);
   };
 
   const handleDecrement = () => {
-    if (isStock && cantidad > 0) setCantidad(cantidad - 1);
+    if (isStock) {
+      setCantidad((currentCantidad) => Math.max(0, currentCantidad - 1));
+    }
   };
 
   const handleAddToCart = () => {
@@ -118,7 +120,15 @@ const ProductItem = ({ product }) => {
             </span>
           )}
         </div>
-
+        <button
+            className={`btn-add-to-cart ${!isStock || cantidad === 0 || isAdded ? 'btn-disabled' : ''} ${
+              isAdded ? 'btn-added' : ''
+            }`}
+            onClick={handleAddToCart}
+            disabled={!isStock || cantidad === 0 || isAdded}
+          >
+            <h2>{!isStock ? '🚫 AGOTADO' : isAdded ? '✅ ¡Agregado!' : '🛒 Agregar​'}</h2>
+        </button>
         <div className="custom-qty-controls">
           <button
             className="qty-button minus"
@@ -138,15 +148,7 @@ const ProductItem = ({ product }) => {
         </div>
       </div>
 
-      <button
-        className={`btn-add-to-cart ${!isStock ? 'btn-disabled' : ''} ${
-          isAdded ? 'btn-added' : ''
-        }`}
-        onClick={handleAddToCart}
-        disabled={!isStock || cantidad === 0 || isAdded}
-      >
-        {!isStock ? '🚫 AGOTADO' : isAdded ? '✅ ¡AGREGADO!' : '🛒 AGREGAR AL CARRITO'}
-      </button>
+      
     </div>
   );
 };
