@@ -120,6 +120,7 @@ const ProductItem = ({ product }) => {
             </span>
           )}
         </div>
+        
         <button
             className={`btn-add-to-cart ${!isStock || cantidad === 0 || isAdded ? 'btn-disabled' : ''} ${
               isAdded ? 'btn-added' : ''
@@ -129,6 +130,7 @@ const ProductItem = ({ product }) => {
           >
             <h2>{!isStock ? '🚫 AGOTADO' : isAdded ? '✅ ¡Agregado!' : '🛒 Agregar​'}</h2>
         </button>
+        
         <div className="custom-qty-controls">
           <button
             className="qty-button minus"

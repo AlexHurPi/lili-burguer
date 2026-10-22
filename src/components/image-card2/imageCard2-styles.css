@@ -42,7 +42,7 @@
   /*border: 1px solid #f3f1f1; */
   border-radius: 12px;
   margin: 0.7em;
-  padding: 15px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   gap: 20px; /* Espacio uniforme entre cada producto */
@@ -144,12 +144,13 @@
 /* Fila donde va el precio y los botones +/- */
 .price-quantity-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
   justify-content: space-between;
   align-items: center;  
   flex-wrap: wrap; /* Evita que los controles se desborden en móviles pequeños */ 
   margin-top: 4px;
   margin-bottom: 5px;
+  padding-inline: 5px;
   gap: 5px;
 }
 
@@ -415,7 +416,7 @@
 /* Media Query para dispositivos con ancho menor o igual a 400px */
 @media screen and (max-width: 400px) {
   .products-container {  
-  padding: 10px;  
+  padding: 5px;  
   margin: 0.5em;
 }
 }
